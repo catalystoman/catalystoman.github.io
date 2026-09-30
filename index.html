@@ -1,656 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Catalyst Oman — AI Visibility for Omani Businesses</title>
-<meta name="description" content="Catalyst Oman audits and fixes how ChatGPT and Gemini see your business. 5 Founding Partner spots — Muscat pilot.">
-<style>
-  :root{
-    --blue:#1D5BA3;
-    --blue-dark:#164a87;
-    --teal:#17C9C9;
-    --amber:#E67E22;
-    --navy:#0F2D52;
-    --light-teal:#4FE0E0;
-    --teal-dark:#0B7A7A;
-    --ink:#152238;
-    --ink-soft:#425169;
-    --muted-on-light:#5A6B82;
-    --muted-on-dark:#93A0B8;
-    --paper:#FFFFFF;
-    --paper-soft:#F4F7FA;
-    --line:#DCE3EC;
-    color-scheme:light;
-    --font-en:'Poppins','Segoe UI',system-ui,-apple-system,sans-serif;
-    --font-ar-h:'Cairo','Segoe UI',system-ui,-apple-system,sans-serif;
-    --font-ar-b:'Almarai','Segoe UI',system-ui,-apple-system,sans-serif;
-    --maxw:1120px;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--font-en);
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  html[data-lang="ar"] body{font-family:var(--font-ar-b);}
-  html[data-lang="ar"] h1, html[data-lang="ar"] h2, html[data-lang="ar"] h3, html[data-lang="ar"] .btn{
-    font-family:var(--font-ar-h);
-  }
-  h1,h2,h3{margin:0 0 .5em 0; font-weight:700; letter-spacing:-0.01em;}
-  p{margin:0 0 1em 0;}
-  a{color:var(--blue);}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 1.25rem;}
-  section{padding:3.5rem 0;}
-  @media(min-width:768px){ section{padding:5rem 0;} }
-
-  /* language visibility */
-  html[data-lang="en"] .ar{display:none;}
-  html[data-lang="ar"] .en{display:none;}
-
-  /* header */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-  }
-  .header-row{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:.75rem 1.25rem; max-width:var(--maxw); margin:0 auto; gap:1rem;
-  }
-  .brand{display:flex; align-items:center; gap:.55rem; text-decoration:none; color:var(--ink);}
-  .brand svg{width:34px; height:34px; flex-shrink:0;}
-  .brand span{font-weight:700; font-size:1.05rem; color:var(--navy);}
-  .header-actions{display:flex; align-items:center; gap:.6rem;}
-  .lang-toggle{
-    border:1px solid var(--line); background:var(--paper); color:var(--ink);
-    border-radius:999px; padding:.4rem .9rem; font-size:.85rem; font-weight:600;
-    cursor:pointer; font-family:inherit;
-  }
-  .lang-toggle:hover{border-color:var(--blue);}
-  .btn{
-    display:inline-block; font-weight:600; text-decoration:none; text-align:center;
-    border-radius:8px; padding:.75rem 1.4rem; font-size:.95rem; cursor:pointer;
-    border:2px solid transparent; font-family:inherit;
-  }
-  .btn-amber{background:var(--amber); color:var(--navy);}
-  .btn-amber:hover{filter:brightness(1.08);}
-  .btn-outline{background:transparent; border-color:#fff; color:#fff;}
-  .btn-outline:hover{background:rgba(255,255,255,.12);}
-  .btn-navy-outline{background:transparent; border-color:var(--blue); color:var(--blue);}
-  .header-actions .btn{padding:.55rem 1rem; font-size:.85rem;}
-  @media(max-width:640px){ .header-actions .btn span.long{display:none;} }
-
-  /* hero */
-  #hero{background:var(--blue); color:#fff; padding-top:4rem; padding-bottom:4rem;}
-  #hero h1{font-size:1.9rem; line-height:1.25; max-width:820px;}
-  @media(min-width:768px){ #hero h1{font-size:2.7rem;} }
-  #hero .subhead{font-size:1.1rem; max-width:640px; color:#DCEBFA; margin-bottom:1.75rem;}
-  .hero-ctas{display:flex; flex-wrap:wrap; align-items:center; gap:1.25rem; margin-bottom:1.5rem;}
-  .hero-secondary{color:#fff; text-decoration:underline; font-weight:600; font-size:.95rem;}
-  .trust-line{
-    display:inline-block; font-size:.85rem; font-weight:600; color:var(--navy);
-    background:var(--light-teal); padding:.4rem .9rem; border-radius:999px;
-  }
-
-  /* the shift */
-  #shift{text-align:center; background:var(--paper);}
-  #shift .wrap{max-width:760px;}
-  #shift h2{font-size:1.6rem; color:var(--navy);}
-  #shift p{font-size:1.15rem; color:var(--ink-soft);}
-
-  /* problem */
-  #problem{background:var(--navy); color:#fff;}
-  #problem h2{color:#fff; font-size:1.6rem; text-align:center; margin-bottom:2.5rem;}
-  .card-grid{display:grid; gap:1.75rem; grid-template-columns:1fr;}
-  @media(min-width:768px){ .card-grid{grid-template-columns:repeat(3,1fr);} }
-  .problem-card{border-inline-start:3px solid var(--light-teal); padding-inline-start:1.1rem;}
-  html[dir="rtl"] .problem-card{border-inline-start:none; border-inline-end:3px solid var(--light-teal); padding-inline-start:0; padding-inline-end:1.1rem;}
-  .problem-card h3{color:var(--light-teal); font-size:1.05rem;}
-  .problem-card p{color:#C9D6E8; font-size:.95rem;}
-
-  /* how it works */
-  #how-it-works{background:var(--paper);}
-  .ladder{display:grid; gap:1.5rem; grid-template-columns:1fr; margin-top:2rem;}
-  @media(min-width:1024px){ .ladder{grid-template-columns:repeat(3,1fr);} }
-  .step-card{
-    border:1px solid var(--line); border-radius:10px; padding:1.5rem;
-    background:var(--paper-soft); position:relative;
-  }
-  .step-num{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:2rem; height:2rem; border-radius:50%; background:var(--blue); color:#fff;
-    font-weight:700; font-size:.9rem; margin-bottom:.9rem;
-  }
-  .step-card h3{font-size:1.1rem; color:var(--navy);}
-  .price-line{font-size:1.05rem; font-weight:700; margin-bottom:.6rem;}
-  .price-line .strike{text-decoration:line-through; color:var(--muted-on-light); font-weight:500; font-size:.9em;}
-  .price-line .free{color:var(--teal-dark);}
-  .price-founding{color:var(--teal-dark); font-weight:700;}
-  .price-standard{color:var(--muted-on-light); font-weight:500; font-size:.92em;}
-  .ladder-note{
-    margin-top:1.75rem; text-align:center; font-size:.95rem; color:var(--ink-soft);
-    max-width:720px; margin-left:auto; margin-right:auto;
-  }
-
-  /* who it's for */
-  #who-its-for{background:var(--paper);}
-  #who-its-for h2{text-align:center; font-size:1.6rem; color:var(--navy);}
-  #who-its-for .intro{text-align:center; max-width:640px; margin:0 auto 2.25rem; color:var(--ink-soft);}
-  .sector-grid{display:grid; gap:1rem; grid-template-columns:repeat(2,1fr);}
-  @media(min-width:768px){ .sector-grid{grid-template-columns:repeat(3,1fr);} }
-  .sector-item{
-    border:1px solid var(--line); border-radius:8px; padding:1rem .9rem;
-    font-weight:600; font-size:.92rem; color:var(--ink); text-align:center;
-    background:var(--paper);
-  }
-  .pilot-strip{
-    background:var(--teal); color:#06322F; margin-top:2rem; border-radius:10px;
-    padding:1.1rem 1.5rem; text-align:center; font-weight:600; font-size:.95rem;
-  }
-
-  /* proof */
-  #proof{background:var(--paper-soft);}
-  #proof h2{text-align:center; font-size:1.6rem; color:var(--navy);}
-  .finding-card{
-    max-width:820px; margin:2rem auto 0; background:#fff; border:1px solid var(--teal);
-    border-radius:12px; padding:1.75rem;
-  }
-  .finding-lead{font-size:1.15rem; font-weight:600; color:var(--navy); text-align:center; margin-bottom:1.5rem;}
-  .report-grid{display:grid; gap:1rem; grid-template-columns:1fr;}
-  @media(min-width:640px){ .report-grid{grid-template-columns:repeat(3,1fr);} }
-  .metric{text-align:center; padding:1rem; background:var(--paper-soft); border-radius:8px;}
-  .metric .num{font-size:1.8rem; font-weight:700; color:var(--blue); line-height:1.1;}
-  .metric .label{font-size:.85rem; color:var(--ink-soft); margin-top:.3rem;}
-  .gemini-strip{
-    margin-top:1.75rem; padding-top:1.5rem; border-top:1px solid var(--line);
-  }
-  .gemini-bars{display:flex; gap:1.5rem; align-items:flex-end; justify-content:center; margin:1rem 0;}
-  .gbar{text-align:center;}
-  .gbar .bar{width:60px; background:var(--teal); border-radius:4px 4px 0 0; margin:0 auto;}
-  .gbar .bar.empty{background:#E3E9F0;}
-  .gbar .fig{font-weight:700; margin-top:.4rem;}
-  .gbar .cap{font-size:.8rem; color:var(--ink-soft);}
-  .context-line{text-align:center; color:var(--ink-soft); font-size:.95rem; max-width:680px; margin:1.75rem auto 0;}
-  .visually-hidden-note{font-size:.8rem; color:var(--muted-on-light); text-align:center; margin-top:1rem; font-style:italic;}
-
-  /* process */
-  .timeline{display:grid; gap:1.75rem; grid-template-columns:1fr; margin-top:2.25rem;}
-  @media(min-width:768px){ .timeline{grid-template-columns:repeat(4,1fr);} }
-  .tstep h3{font-size:1rem; color:var(--navy);}
-  .tstep p{font-size:.92rem; color:var(--ink-soft);}
-  #process{background:var(--paper);}
-  #process h2{text-align:center; font-size:1.6rem; color:var(--navy);}
-
-  /* founding partner */
-  #founding-partner{background:var(--navy); color:#fff;}
-  .fp-card{
-    max-width:760px; margin:0 auto; border:1px solid rgba(230,126,34,.5);
-    border-radius:14px; padding:2rem; background:rgba(255,255,255,.03);
-  }
-  #founding-partner h2{font-size:1.6rem; text-align:center; color:#fff;}
-  .fp-intro{text-align:center; color:#C9D6E8; max-width:600px; margin:0 auto 1.5rem;}
-  .fp-list{list-style:none; margin:0 0 1.5rem; padding:0;}
-  .fp-list li{
-    padding-inline-start:1.6rem; position:relative; margin-bottom:.85rem; color:#E4ECF7; font-size:.95rem;
-  }
-  .fp-list li::before{
-    content:"—"; position:absolute; inset-inline-start:0; color:var(--light-teal); font-weight:700;
-  }
-  .fp-deposit{
-    background:rgba(255,255,255,.06); border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.5rem;
-    font-size:.92rem; color:#E4ECF7;
-  }
-  .fp-counter{
-    text-align:center; font-weight:700; color:var(--amber); font-size:1.05rem; margin-bottom:1.5rem;
-  }
-  .fp-cta{text-align:center;}
-
-  /* faq */
-  #faq{background:var(--paper);}
-  #faq h2{text-align:center; font-size:1.6rem; color:var(--navy); margin-bottom:2rem;}
-  .faq-list{max-width:820px; margin:0 auto;}
-  details{border-bottom:1px solid var(--line); padding:1rem 0;}
-  summary{
-    cursor:pointer; font-weight:600; color:var(--navy); font-size:1rem;
-    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:1rem;
-  }
-  summary::-webkit-details-marker{display:none;}
-  summary::after{content:"+"; font-size:1.3rem; color:var(--teal-dark); flex-shrink:0;}
-  details[open] summary::after{content:"−";}
-  details p{margin-top:.75rem; color:var(--ink-soft); font-size:.95rem;}
-
-  /* final cta */
-  #cta{background:var(--blue); color:#fff; text-align:center;}
-  #cta h2{font-size:1.7rem;}
-  #cta .subhead{color:#DCEBFA; margin-bottom:1.75rem;}
-  .cta-buttons{display:flex; flex-wrap:wrap; justify-content:center; gap:1.25rem; align-items:center;}
-
-  /* footer */
-  footer{background:var(--navy); color:#B9C6DA; padding:2.25rem 0; font-size:.85rem; text-align:center;}
-  footer .flinks{margin:.75rem 0;}
-  footer .flinks a{color:var(--light-teal); text-decoration:none; margin:0 .6rem;}
-  footer .fconf{margin-top:.75rem; color:var(--muted-on-dark);}
-
-  :focus-visible{outline:3px solid var(--amber); outline-offset:2px;}
-  @media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important;} }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="header-row">
-    <a href="#hero" class="brand" aria-label="Catalyst Oman home">
-      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Catalyst Oman logo">
-        <circle cx="24" cy="24" r="22" fill="#1D5BA3"/>
-        <path d="M16 24 L28 24 M28 24 L22 18 M28 24 L22 30" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="33" cy="15" r="3.2" fill="#17C9C9"/>
-      </svg>
-      <span>Catalyst Oman</span>
-    </a>
-    <div class="header-actions">
-      <a href="#founding-partner" class="btn btn-amber">
-        <span class="en">Claim a Founding Partner Spot</span>
-        <span class="ar">احجز مقعدك كشريك مؤسس</span>
-      </a>
-      <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">EN / AR</button>
-    </div>
-  </div>
-</header>
-
-<main>
-
-  <!-- 1. HERO -->
-  <section id="hero">
-    <div class="wrap">
-      <h1 class="en">When your customers ask ChatGPT for a clinic in Muscat, does your name come up?</h1>
-      <h1 class="ar">لما عملاءك يسألون ChatGPT عن عيادة في مسقط، هل اسمك يطلع؟</h1>
-
-      <p class="subhead en">Most Omani businesses are invisible to the AI their customers now ask first.</p>
-      <p class="subhead ar">أغلب الشركات العُمانية غير موجودة بالنسبة للذكاء الاصطناعي اللي عملاءها صاروا يسألونه أول شي.</p>
-
-      <div class="hero-ctas">
-        <a href="#founding-partner" class="btn btn-amber">
-          <span class="en">Claim a Founding Partner Spot</span>
-          <span class="ar">احجز مقعدك كشريك مؤسس</span>
-        </a>
-        <a href="#how-it-works" class="hero-secondary">
-          <span class="en">See how it works ↓</span>
-          <span class="ar">شوف كيف تشتغل الخدمة ↓</span>
-        </a>
-      </div>
-
-      <span class="trust-line en">Muscat pilot — 5 of 5 Founding Partner spots available</span>
-      <span class="trust-line ar">تجربة مسقط — 5 من 5 مقاعد شراكة تأسيسية متاحة</span>
-    </div>
-  </section>
-
-  <!-- 2. THE SHIFT -->
-  <section id="shift">
-    <div class="wrap">
-      <h2 class="en">Search has changed. Has your business kept up?</h2>
-      <h2 class="ar">طريقة البحث تغيرت. هل شركتك واكبت التغيير؟</h2>
-
-      <p class="en">Customers used to Google a business, scroll ten links, and pick one. Now they open ChatGPT or Gemini, ask one question, and act on the first answer they get. That answer either includes your business — or it doesn't.</p>
-      <p class="ar">العميل قبل كان يدخل جوجل، يمرر على عشر روابط، ويختار وحدة. اليوم يفتح ChatGPT أو Gemini، يسأل سؤال واحد، ويتصرف على أساس أول إجابة توصله. هذي الإجابة إما تذكر شركتك — أو ما تذكرها.</p>
-    </div>
-  </section>
-
-  <!-- 3. THE PROBLEM -->
-  <section id="problem">
-    <div class="wrap">
-      <h2 class="en">Why AI doesn't know your business exists</h2>
-      <h2 class="ar">ليش الذكاء الاصطناعي ما يعرف إن شركتك موجودة</h2>
-
-      <div class="card-grid">
-        <div class="problem-card">
-          <h3 class="en">No structured data</h3>
-          <h3 class="ar">بيانات غير منظمة</h3>
-          <p class="en">Your website may look fine to a human. To an AI system reading it, your hours, services, and location are often missing, buried, or inconsistent.</p>
-          <p class="ar">موقعك ممكن يبين زين لعين الإنسان. بس بالنسبة لنظام ذكاء اصطناعي يقرأ الموقع، ساعات العمل والخدمات والموقع الجغرافي غالباً تكون ناقصة أو مدفونة أو غير متطابقة.</p>
-        </div>
-        <div class="problem-card">
-          <h3 class="en">Bilingual gaps</h3>
-          <h3 class="ar">فجوة بين اللغتين</h3>
-          <p class="en">If your Arabic and English information don't say the same thing — or one language is missing entirely — AI systems default to whichever version they trust more, which may not be yours.</p>
-          <p class="ar">إذا المعلومات بالعربي والإنجليزي ما تقول نفس الشي — أو لغة كاملة ناقصة — نظام الذكاء الاصطناعي يعتمد على النسخة اللي يثق فيها أكثر، وممكن ما تكون نسختك.</p>
-        </div>
-        <div class="problem-card">
-          <h3 class="en">Fragmented identity</h3>
-          <h3 class="ar">هوية مبعثرة</h3>
-          <p class="en">Your Google Business Profile, website, and social pages often list different phone numbers, hours, or addresses. AI systems treat that mismatch as a reason to leave you out.</p>
-          <p class="ar">غالباً رقم الهاتف وساعات العمل والعنوان يختلفون بين ملفك في جوجل بزنس وموقعك وصفحاتك بالسوشال ميديا. الذكاء الاصطناعي يشوف هذا التضارب سبب كافي إنه يتجاهلك.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. HOW IT WORKS -->
-  <section id="how-it-works">
-    <div class="wrap">
-      <h2 class="en" style="text-align:center;color:var(--navy);font-size:1.6rem;">A three-step ladder — start small, only pay more when you see it working</h2>
-      <h2 class="ar" style="text-align:center;color:var(--navy);font-size:1.6rem;">ثلاث خطوات واضحة — تبدأ بمبلغ بسيط، وما تدفع أكثر إلا لما تشوف النتيجة</h2>
-
-      <div class="ladder">
-        <div class="step-card">
-          <span class="step-num">1</span>
-          <h3 class="en">Audit</h3>
-          <h3 class="ar">التدقيق</h3>
-          <div class="price-line">
-            <span class="strike">OMR 250</span> <span class="free en">OMR 50 founding diagnostic fee</span><span class="free ar">50 ر.ع رسوم تشخيص تأسيسية</span>
-          </div>
-          <p class="en">We run a 180-point check on how AI systems currently see your business, and hand you a clear, written report — your AI Visibility Score, where you're losing visibility, and what's fixable. Founding Partners pay only the OMR 50 founding diagnostic fee, fully credited toward the Fix (Step 2) if you continue.</p>
-          <p class="ar">نسوي فحص من 180 نقطة على كيف يشوف الذكاء الاصطناعي شركتك حالياً، ونسلمك تقرير واضح ومكتوب — نتيجة ظهورك بالذكاء الاصطناعي، ووين تخسر الظهور، وإيش القابل للإصلاح. الشركاء المؤسسون يدفعون بس 50 ريال عماني رسوم تشخيص تأسيسية تُحتسب بالكامل من قيمة الإصلاح (الخطوة 2) إذا كملت معنا.</p>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">2</span>
-          <h3 class="en">Fix</h3>
-          <h3 class="ar">الإصلاح</h3>
-          <div class="price-line">
-            <span class="price-founding en">OMR 350</span><span class="price-founding ar">350 ر.ع</span>
-            <span class="en"> (Founding Partner rate) · </span><span class="ar"> (سعر الشراكة التأسيسية) · </span>
-            <span class="price-standard en">OMR 450–650 standard</span><span class="price-standard ar">450–650 ر.ع السعر العادي</span>
-          </div>
-          <p class="en">We correct the structured data, bilingual gaps, and identity mismatches the audit found — so ChatGPT and Gemini have accurate, consistent information to recommend you from.</p>
-          <p class="ar">نصلح البيانات غير المنظمة، والفجوة بين اللغتين، وتضارب الهوية اللي كشفها التدقيق — عشان يصير عند ChatGPT وGemini معلومات دقيقة ومتطابقة توصي بها.</p>
-        </div>
-
-        <div class="step-card">
-          <span class="step-num">3</span>
-          <h3 class="en">Retainer</h3>
-          <h3 class="ar">الاشتراك الشهري</h3>
-          <div class="price-line">
-            <span class="price-founding en">OMR 150/month</span><span class="price-founding ar">150 ر.ع شهرياً</span>
-            <span class="en"> (Founding Partner rate) · </span><span class="ar"> (سعر الشراكة التأسيسية) · </span>
-            <span class="price-standard en">OMR 250/month standard</span><span class="price-standard ar">250 ر.ع شهرياً السعر العادي</span>
-          </div>
-          <p class="en">We monitor your AI visibility month to month, catch new gaps as AI systems update, and keep your information current across both languages.</p>
-          <p class="ar">نراقب ظهورك بالذكاء الاصطناعي شهر بعد شهر، ونمسك أي فجوة جديدة تظهر مع تحديثات أنظمة الذكاء الاصطناعي، ونخلي معلوماتك محدّثة باللغتين.</p>
-        </div>
-      </div>
-
-      <p class="ladder-note en">Founding Partners secure Step 1 for an OMR 50 founding diagnostic fee, fully credited toward the Fix — and lock in the founding rate on Steps 2 and 3 even after the pilot ends.</p>
-      <p class="ladder-note ar">الشركاء المؤسسون يحصلون على الخطوة 1 مقابل 50 ريال عماني رسوم تشخيص تأسيسية تُحتسب بالكامل من قيمة الإصلاح — ويثبتون سعر الشراكة التأسيسية على الخطوة 2 والخطوة 3 حتى بعد ما تنتهي التجربة.</p>
-    </div>
-  </section>
-
-  <!-- 5. WHO IT'S FOR -->
-  <section id="who-its-for">
-    <div class="wrap">
-      <h2 class="en">Built for any Omani business with a website and customers</h2>
-      <h2 class="ar">لأي شركة عُمانية عندها موقع وعملاء</h2>
-
-      <p class="intro en">We work across sectors. If people search for you, compare you, or ask AI to recommend someone like you, this applies to your business.</p>
-      <p class="intro ar">نشتغل مع قطاعات مختلفة. إذا الناس يبحثون عنك، يقارنونك بغيرك، أو يسألون الذكاء الاصطناعي يوصي بشركة مثل شركتك — فهذا يخصك.</p>
-
-      <div class="sector-grid">
-        <div class="sector-item"><span class="en">Healthcare &amp; Clinics</span><span class="ar">الرعاية الصحية والعيادات</span></div>
-        <div class="sector-item"><span class="en">Professional Services</span><span class="ar">الخدمات المهنية</span></div>
-        <div class="sector-item"><span class="en">Retail</span><span class="ar">التجزئة</span></div>
-        <div class="sector-item"><span class="en">Hospitality &amp; Restaurants</span><span class="ar">الضيافة والمطاعم</span></div>
-        <div class="sector-item"><span class="en">Logistics</span><span class="ar">الخدمات اللوجستية</span></div>
-        <div class="sector-item"><span class="en">Real Estate</span><span class="ar">العقارات</span></div>
-      </div>
-
-      <p class="pilot-strip en">Right now, we're running our pilot program with dental and aesthetic clinics in Muscat — refining the process before opening it to every sector above.</p>
-      <p class="pilot-strip ar">حالياً، نشتغل على برنامجنا التجريبي مع عيادات الأسنان والتجميل في مسقط — نطور فيه الطريقة قبل ما نفتحها لباقي القطاعات فوق.</p>
-    </div>
-  </section>
-
-  <!-- 6. THE PROOF -->
-  <section id="proof">
-    <div class="wrap">
-      <h2 class="en">What we found in our first audit</h2>
-      <h2 class="ar">إيش لقينا في أول تدقيق سويناه</h2>
-
-      <div class="finding-card">
-        <p class="finding-lead en">In our first audit — a Muscat clinic — we found an AI Visibility Score of 30 out of 100.</p>
-        <p class="finding-lead ar">في أول تدقيق سويناه — لعيادة في مسقط — لقينا نتيجة ظهور بالذكاء الاصطناعي 30 من 100.</p>
-
-        <div class="report-grid">
-          <div class="metric">
-            <div class="num">30/100</div>
-            <div class="label en">AI Visibility Score</div>
-            <div class="label ar">نتيجة الظهور بالذكاء الاصطناعي</div>
-          </div>
-          <div class="metric">
-            <div class="num">0/66</div>
-            <div class="label en">High-ticket query visibility (implants, orthodontics, cosmetic)</div>
-            <div class="label ar">الظهور في الاستفسارات عالية القيمة (زراعة، تقويم، تجميل)</div>
-          </div>
-          <div class="metric">
-            <div class="num">4</div>
-            <div class="label en">Different names across Google, website &amp; AI outputs</div>
-            <div class="label ar">أسماء مختلفة بين جوجل والموقع ومخرجات الذكاء الاصطناعي</div>
-          </div>
-        </div>
-
-        <div class="gemini-strip">
-          <p class="finding-lead en" style="font-size:1rem;">Gemini, asked "dental clinic in Qurum" — in English vs. the identical question in Arabic</p>
-          <p class="finding-lead ar" style="font-size:1rem;">Gemini، لما سألناه "عيادة أسنان في القرم" — بالإنجليزي مقابل نفس السؤال بالعربي</p>
-          <div class="gemini-bars">
-            <div class="gbar">
-              <div class="bar" style="height:80px;"></div>
-              <div class="fig">3/3</div>
-              <div class="cap en">English</div>
-              <div class="cap ar">إنجليزي</div>
-            </div>
-            <div class="gbar">
-              <div class="bar empty" style="height:6px;"></div>
-              <div class="fig">0/3</div>
-              <div class="cap en">Arabic</div>
-              <div class="cap ar">عربي</div>
-            </div>
-          </div>
-        </div>
-
-        <p class="context-line en">This wasn't a one-off. The same three gaps — structured data, bilingual mismatch, fragmented identity — show up in every sector we've reviewed since, from clinics to retail.</p>
-        <p class="context-line ar">هذي ما كانت حالة فردية. نفس الفجوات الثلاث — البيانات غير المنظمة، وعدم تطابق اللغتين، وتشتت الهوية — تتكرر في كل قطاع راجعناه بعدها، من العيادات للتجزئة.</p>
-
-        <p class="visually-hidden-note en">In plain text: our first audit produced an AI Visibility Score of 30 out of 100. The clinic appeared in 0 of 66 tested queries for high-ticket procedures, was listed under 4 different names across its online presence, and was recommended by Gemini in 3 of 3 English-language tests but 0 of 3 identical tests in Arabic.</p>
-        <p class="visually-hidden-note ar">بالنص الواضح: أول تدقيق سويناه أنتج نتيجة ظهور بالذكاء الاصطناعي 30 من 100. العيادة ظهرت في 0 من 66 استفسار للإجراءات عالية القيمة، وكانت مدرجة تحت 4 أسماء مختلفة، ورشّحها Gemini في 3 من 3 اختبارات بالإنجليزي مقابل 0 من 3 بالعربي.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. THE PROCESS -->
-  <section id="process">
-    <div class="wrap">
-      <h2 class="en">What actually happens during the 180-point audit</h2>
-      <h2 class="ar">إيش يصير بالضبط أثناء تدقيق الـ 180 نقطة</h2>
-
-      <div class="timeline">
-        <div class="tstep">
-          <span class="step-num">1</span>
-          <h3 class="en">We look at how AI sees you today</h3>
-          <h3 class="ar">نشوف كيف الذكاء الاصطناعي يشوفك اليوم</h3>
-          <p class="en">We ask ChatGPT and Gemini about your business and your sector, the way a real customer would.</p>
-          <p class="ar">نسأل ChatGPT وGemini عن شركتك وعن قطاعك، بنفس الطريقة اللي يسأل فيها عميل حقيقي.</p>
-        </div>
-        <div class="tstep">
-          <span class="step-num">2</span>
-          <h3 class="en">We check your data</h3>
-          <h3 class="ar">نراجع بياناتك</h3>
-          <p class="en">Your website, Google Business Profile, and social pages — checked for what's missing, outdated, or inconsistent across Arabic and English.</p>
-          <p class="ar">موقعك، وملفك في جوجل بزنس، وصفحاتك بالسوشال ميديا — نتأكد إيش ناقص، أو قديم، أو غير متطابق بين العربي والإنجليزي.</p>
-        </div>
-        <div class="tstep">
-          <span class="step-num">3</span>
-          <h3 class="en">We compare you to nearby competitors</h3>
-          <h3 class="ar">نقارنك بالمنافسين القريبين منك</h3>
-          <p class="en">So you know not just where you stand, but where you stand relative to who's currently winning the recommendation.</p>
-          <p class="ar">عشان تعرف مو بس وينك واقف، بل وينك واقف مقارنة بمن يكسب التوصية حالياً.</p>
-        </div>
-        <div class="tstep">
-          <span class="step-num">4</span>
-          <h3 class="en">We hand you the report</h3>
-          <h3 class="ar">نسلمك التقرير</h3>
-          <p class="en">In plain language, with a score, a list of gaps, and a list of fixes — no jargon, no dashboard login required to understand it.</p>
-          <p class="ar">بلغة بسيطة، فيه نتيجة، وقائمة بالفجوات، وقائمة بالإصلاحات — بدون تعقيد، وبدون ما تحتاج تدخل لوحة تحكم عشان تفهمه.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. FOUNDING PARTNER PROGRAM -->
-  <section id="founding-partner">
-    <div class="wrap">
-      <div class="fp-card">
-        <h2 class="en">The Founding Partner Program</h2>
-        <h2 class="ar">برنامج الشراكة التأسيسية</h2>
-
-        <p class="fp-intro en">We're opening 5 Founding Partner spots for our Muscat pilot — dental and aesthetic clinics first, expanding to other sectors as the pilot proves out.</p>
-        <p class="fp-intro ar">نفتح 5 مقاعد للشراكة التأسيسية ضمن تجربتنا في مسقط — نبدأ بعيادات الأسنان والتجميل، وبعدين نوسّع لقطاعات ثانية بعد ما تثبت التجربة نجاحها.</p>
-
-        <ul class="fp-list en">
-          <li>A full 180-point AI Visibility Audit — OMR 50 founding diagnostic fee for Founding Partners (OMR 250 standard)</li>
-          <li>Your written report: score, high-ticket query visibility, and identity consistency across your online presence</li>
-          <li>Founding Partner pricing locked in on Steps 2 and 3 (OMR 350 Fix, OMR 150/month Retainer), even after the pilot ends</li>
-          <li>Direct access to the person doing your audit — not a support ticket queue</li>
-        </ul>
-        <ul class="fp-list ar">
-          <li>تدقيق ظهور كامل من 180 نقطة أمام الذكاء الاصطناعي — 50 ر.ع رسوم تشخيص تأسيسية للشركاء المؤسسين (السعر العادي 250 ر.ع)</li>
-          <li>تقريرك المكتوب: النتيجة، والظهور في الاستفسارات عالية القيمة، وتطابق هويتك عبر حضورك الرقمي</li>
-          <li>أسعار الشراكة التأسيسية الثابتة على الخطوة 2 والخطوة 3 (350 ر.ع للإصلاح، 150 ر.ع شهرياً للاشتراك)، حتى بعد ما تنتهي التجربة</li>
-          <li>تواصل مباشر مع الشخص اللي يسوي تدقيقك — مو طابور دعم فني</li>
-        </ul>
-
-        <div class="fp-deposit en"><strong>Founding diagnostic fee:</strong> OMR 50, fully credited toward the Fix if you continue. This isn't a discount gimmick — it's a filter, so we work with businesses that are serious about being found.</div>
-        <div class="fp-deposit ar"><strong>رسوم التشخيص التأسيسية:</strong> 50 ريال عماني، تُحتسب بالكامل من قيمة الإصلاح إذا كملت معنا. هذا مو خصم تسويقي — هذا فلتر، عشان نشتغل مع شركات جادة بموضوع إنها تنلقى.</div>
-
-        <p class="fp-counter en">5 of 5 spots remaining</p>
-        <p class="fp-counter ar">5 من 5 مقاعد متبقية</p>
-
-        <div class="fp-cta">
-          <a href="https://wa.me/96894440005" class="btn btn-amber">
-            <span class="en">Claim a Founding Partner Spot</span>
-            <span class="ar">احجز مقعدك كشريك مؤسس</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9. FAQ -->
-  <section id="faq">
-    <div class="wrap">
-      <h2 class="en">Frequently asked questions</h2>
-      <h2 class="ar">أسئلة شائعة</h2>
-
-      <div class="faq-list">
-        <details open>
-          <summary><span class="en">Nobody in Oman actually uses ChatGPT to find a business.</span><span class="ar">ما أحد بعُمان يستخدم ChatGPT عشان يدور شركة.</span></summary>
-          <p class="en">Some of your customers already do, and the number is growing month over month. The question isn't whether all of them do — it's whether you want to be ready before or after most of them start.</p>
-          <p class="ar">بعض عملائك أكيد يستخدمونه حالياً، والعدد يزيد شهر بعد شهر. السؤال مو هل الكل يستخدمه — السؤال هل تبي تكون جاهز قبل ما أغلبهم يبدأ، ولا بعده.</p>
-        </details>
-
-        <details>
-          <summary><span class="en">We already do SEO. Isn't this the same thing?</span><span class="ar">إحنا أصلاً نسوي SEO. مو نفس الشي؟</span></summary>
-          <p class="en">No. SEO gets you found on Google's list of links. This is about whether ChatGPT and Gemini mention your business directly when someone asks for a recommendation — a different set of data and a different set of rules.</p>
-          <p class="ar">لا. الـ SEO يخليك تظهر بقائمة روابط جوجل. هذا الموضوع مختلف — يهتم هل ChatGPT وGemini يذكرون شركتك مباشرة لما أحد يسأل عن توصية، وهذا يعتمد على بيانات وقواعد مختلفة تماماً.</p>
-        </details>
-
-        <details>
-          <summary><span class="en">Why would I pay for an audit if it's supposed to help me anyway?</span><span class="ar">ليش أدفع مقابل تدقيق إذا المفروض يفيدني أصلاً؟</span></summary>
-          <p class="en">Founding Partners pay an OMR 50 founding diagnostic fee instead of the OMR 250 standard price, and it is fully credited toward the Fix if you continue. You get a written report either way.</p>
-          <p class="ar">الشركاء المؤسسون يدفعون 50 ريال عماني رسوم تشخيص تأسيسية تُحتسب بالكامل من قيمة الإصلاح إذا كملت معنا، بدل السعر العادي 250 ر.ع. وفي كل الأحوال تستلم تقرير مكتوب.</p>
-        </details>
-
-        <details>
-          <summary><span class="en">We're not a clinic — does this apply to us?</span><span class="ar">إحنا مو عيادة — هل ينطبق علينا؟</span></summary>
-          <p class="en">Yes. The clinic pilot is where we're refining the process right now, but the same gaps — structured data, bilingual mismatch, fragmented identity — affect any business with a website and customers, in any sector.</p>
-          <p class="ar">أكيد. التجربة مع العيادات هي وين نطور فيها الطريقة حالياً، بس نفس الفجوات — البيانات غير المنظمة، وعدم تطابق اللغتين، وتشتت الهوية — تأثر على أي شركة عندها موقع وعملاء، بأي قطاع.</p>
-        </details>
-
-        <details>
-          <summary><span class="en">What happens after the audit — am I locked into the Fix and Retainer steps?</span><span class="ar">بعد التدقيق، هل أصير ملزم بخطوة الإصلاح والاشتراك الشهري؟</span></summary>
-          <p class="en">No. Each step is a separate decision. You can stop after the audit with your report in hand, no further commitment.</p>
-          <p class="ar">لا. كل خطوة قرار مستقل. تقدر توقف بعد التدقيق وتاخذ تقريرك، بدون أي التزام إضافي.</p>
-        </details>
-
-        <details>
-          <summary><span class="en">How long does the audit take?</span><span class="ar">كم يستغرق التدقيق؟</span></summary>
-          <p class="en">5 to 7 business days from when we start.</p>
-          <p class="ar">من 5 إلى 7 أيام عمل من بداية التدقيق.</p>
-        </details>
-
-        <details>
-          <summary><span class="en">What if our website is in Arabic only, or English only?</span><span class="ar">إيش إذا موقعنا بالعربي بس، أو بالإنجليزي بس؟</span></summary>
-          <p class="en">That's one of the most common gaps we find. Part of the audit specifically checks whether your business is represented consistently in both languages — since AI systems weigh both when deciding who to recommend. In our first audit, the same business was recommended by Gemini in every English-language test and none of the identical Arabic-language tests.</p>
-          <p class="ar">هذي من أكثر الفجوات اللي نلقاها. جزء من التدقيق يفحص بالضبط هل شركتك موجودة بشكل متطابق باللغتين، لأن أنظمة الذكاء الاصطناعي تعتمد على اللغتين وهي تقرر مين توصي فيه. في أول تدقيق سويناه، نفس الشركة رشحها Gemini في كل اختبار بالإنجليزي، وما رشحها ولا مرة بنفس الاختبار بالعربي.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. FINAL CTA -->
-  <section id="cta">
-    <div class="wrap">
-      <h2 class="en">Ready to see how AI currently sees your business?</h2>
-      <h2 class="ar">جاهز تشوف كيف الذكاء الاصطناعي يشوف شركتك حالياً؟</h2>
-
-      <p class="subhead en">5 of 5 Founding Partner spots. Muscat pilot. Straightforward next step.</p>
-      <p class="subhead ar">5 من 5 مقاعد شراكة تأسيسية. تجربة مسقط. خطوة تالية واضحة وبسيطة.</p>
-
-      <div class="cta-buttons">
-        <a href="https://wa.me/96894440005" class="btn btn-amber">
-          <span class="en">Message us on WhatsApp</span>
-          <span class="ar">راسلنا على واتساب</span>
-        </a>
-        <a href="mailto:catalystoman@proton.me" class="hero-secondary">
-          <span class="en">Or email us</span>
-          <span class="ar">أو راسلنا بالإيميل</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="brand" style="justify-content:center;color:#fff;">
-      <svg viewBox="0 0 48 48" width="26" height="26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="24" cy="24" r="22" fill="#17C9C9"/>
-        <path d="M16 24 L28 24 M28 24 L22 18 M28 24 L22 30" stroke="#0F2D52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      </svg>
-      <span class="en" style="color:#fff;">Catalyst Oman © 2026</span>
-      <span class="ar" style="color:#fff;">كاتاليست عُمان © 2026</span>
-    </div>
-    <div class="flinks">
-      <a href="https://wa.me/96894440005"><span class="en">WhatsApp</span><span class="ar">واتساب</span></a>
-      <a href="mailto:catalystoman@proton.me"><span class="en">Email</span><span class="ar">الإيميل</span></a>
-    </div>
-    <div class="fconf">
-      <span class="en">Confidential. Not for distribution.</span>
-      <span class="ar">سري. غير مخصص للتوزيع.</span>
-    </div>
-  </div>
-</footer>
+<meta name="description" content="When your customers ask ChatGPT or Gemini for a recommendation, does your business come up? Catalyst Oman runs a 180-point AI Visibility Audit for Omani businesses, in English and Arabic.">
+<meta property="og:title" content="Catalyst Oman — AI Visibility for Omani Businesses">
+<meta property="og:description" content="Does your business come up when customers ask ChatGPT or Gemini? Founding Partner spots open for the Muscat pilot.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://catalystoman.github.io">
+<meta name="theme-color" content="#0F2D52">
+<link rel="alternate" hreflang="en" href="https://catalystoman.github.io/">
+<link rel="alternate" hreflang="ar" href="https://catalystoman.github.io/?lang=ar">
+<link rel="canonical" id="canonical" href="https://catalystoman.github.io/">
+<script>/* Motion flag: set before first paint so below-fold reveals never flash */try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('mo')}catch(e){}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%231D5BA3'/%3E%3Cpath d='M20 32h22M34 23l9 9-9 9' stroke='white' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='13' r='6' fill='%2317C9C9'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Cairo:wght@600;700;800&family=Almarai:wght@400;700&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Catalyst Oman",
+  "alternateName": "كاتاليست عُمان",
   "url": "https://catalystoman.github.io",
+  "logo": "https://catalystoman.github.io/logo.png",
+  "email": "catalystoman@proton.me",
+  "areaServed": { "@type": "Country", "name": "Oman" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Muscat", "addressCountry": "OM" },
+  "knowsLanguage": ["en", "ar"],
   "sameAs": ["https://www.instagram.com/catalyst.oman"],
-  "areaServed": "OM",
-  "description": "AI visibility agency helping Omani SMEs across sectors appear accurately when customers ask ChatGPT and Gemini for recommendations.",
+  "description": "AI visibility agency helping Omani businesses across sectors appear accurately when customers ask ChatGPT and Gemini for recommendations, in English and Arabic.",
   "contactPoint": {
     "@type": "ContactPoint",
-    "contactType": "customer service",
+    "contactType": "sales",
     "email": "catalystoman@proton.me",
     "url": "https://wa.me/96894440005",
+    "availableLanguage": ["English", "Arabic"],
     "areaServed": "OM"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Services available after the AI Visibility Audit",
+    "itemListElement": [
+      { "@type": "Offer", "description": "Available after the AI Visibility Audit. Priced per business.", "itemOffered": { "@type": "Service", "name": "WhatsApp Front Desk Agent", "serviceType": "WhatsApp customer service agent", "description": "Answers customers on WhatsApp 24/7 in Arabic and English, books appointments or qualifies enquiries, and hands complaints to the business's team." } },
+      { "@type": "Offer", "description": "Available after the AI Visibility Audit. Priced per business.", "itemOffered": { "@type": "Service", "name": "Follow-up & Recall", "serviceType": "Scheduled customer follow-up messaging", "description": "Follows up with patients and leads who went quiet, on a schedule the business sets, using only details the business provides." } },
+      { "@type": "Offer", "description": "Available after the AI Visibility Audit. Priced per business.", "itemOffered": { "@type": "Service", "name": "AI Video Ads & Reels", "serviceType": "AI video advertising", "description": "Video ads and reels made from the business's existing photos and renders, with Arabic and English captions." } },
+      { "@type": "Offer", "description": "Available after the AI Visibility Audit. Priced per business.", "itemOffered": { "@type": "Service", "name": "Reviews & Reputation", "serviceType": "Google review collection and reply management", "description": "Asks every customer for a Google review and drafts calm replies to negative reviews for the business to approve." } }
+    ]
   }
 }
 </script>
@@ -658,10 +57,21 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "AI Visibility Audit and Optimization",
-  "provider": { "@type": "Organization", "name": "Catalyst Oman" },
-  "areaServed": "OM",
-  "description": "180-point audit and remediation of business data for AI-assisted search systems including ChatGPT and Gemini, serving healthcare, professional services, retail, hospitality, logistics, and real estate sectors, with a current pilot in dental and aesthetic clinics in Muscat."
+  "name": "AI Visibility Audit, Fix and AI Visibility Management",
+  "serviceType": "AI visibility audit and remediation",
+  "provider": { "@type": "Organization", "name": "Catalyst Oman", "url": "https://catalystoman.github.io" },
+  "areaServed": { "@type": "Country", "name": "Oman" },
+  "audience": { "@type": "BusinessAudience", "audienceType": "Omani SMEs: healthcare, professional services, retail, hospitality, logistics, real estate" },
+  "description": "A 180-point audit of how ChatGPT and Gemini see a business in English and Arabic, followed by correction of structured data, bilingual gaps and identity mismatches, and monthly AI Visibility Management. Current pilot: dental and aesthetic clinics in Muscat.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Catalyst Oman services",
+    "itemListElement": [
+      { "@type": "Offer", "name": "AI Visibility Audit (180-point)", "price": "250", "priceCurrency": "OMR", "description": "Founding Partners: OMR 50 founding diagnostic fee, fully credited toward the Fix." },
+      { "@type": "Offer", "name": "Fix", "price": "350", "priceCurrency": "OMR", "description": "Founding Partner rate. Standard OMR 450–650." },
+      {"@type":"Offer","name":"AI Visibility Management","priceSpecification":{"@type":"UnitPriceSpecification","price":"150","priceCurrency":"OMR","unitCode":"MON","unitText":"month"},"description":"Founding Partner rate. Standard OMR 250 per month."}
+    ]
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -670,13 +80,15 @@
   "@type": "FAQPage",
   "inLanguage": "en",
   "mainEntity": [
-    {"@type":"Question","name":"Nobody in Oman actually uses ChatGPT to find a business.","acceptedAnswer":{"@type":"Answer","text":"Some of your customers already do, and the number is growing month over month. The question isn't whether all of them do — it's whether you want to be ready before or after most of them start."}},
-    {"@type":"Question","name":"We already do SEO. Isn't this the same thing?","acceptedAnswer":{"@type":"Answer","text":"No. SEO gets you found on Google's list of links. This is about whether ChatGPT and Gemini mention your business directly when someone asks for a recommendation — a different set of data and a different set of rules."}},
-    {"@type":"Question","name":"Why would I pay for an audit if it's supposed to help me anyway?","acceptedAnswer":{"@type":"Answer","text":"Founding Partners pay an OMR 50 founding diagnostic fee instead of the OMR 250 standard price, and it is fully credited toward the Fix if you continue."}},
-    {"@type":"Question","name":"We're not a clinic — does this apply to us?","acceptedAnswer":{"@type":"Answer","text":"Yes. The clinic pilot is where we're refining the process right now, but the same gaps affect any business with a website and customers, in any sector."}},
-    {"@type":"Question","name":"What happens after the audit — am I locked into the Fix and Retainer steps?","acceptedAnswer":{"@type":"Answer","text":"No. Each step is a separate decision. You can stop after the audit with your report in hand, no further commitment."}},
+    {"@type":"Question","name":"Nobody in Oman uses ChatGPT to find a business. Why does this matter?","acceptedAnswer":{"@type":"Answer","text":"Some of your customers already do. The question isn't whether all of them do today. It's whether your information is ready before most of them start."}},
+    {"@type":"Question","name":"We already do SEO. Isn't this the same thing?","acceptedAnswer":{"@type":"Answer","text":"No. SEO helps you rank in Google's list of links. AI visibility is about whether ChatGPT and Gemini name your business directly when someone asks for a recommendation. That depends on different data: structured information, consistency across platforms, and parity between Arabic and English."}},
+    {"@type":"Question","name":"Why pay for an audit when free tools exist?","acceptedAnswer":{"@type":"Answer","text":"Free tools check your website. Our audit asks ChatGPT and Gemini the questions your customers ask, in both languages, compares you with nearby businesses, and gives you a prioritised fix list. Founding Partners pay a founding diagnostic fee of OMR 50, fully credited toward the Fix."}},
+    {"@type":"Question","name":"Can you guarantee we'll appear in ChatGPT or Gemini?","acceptedAnswer":{"@type":"Answer","text":"No. Nobody controls what ChatGPT or Gemini say. We make sure the information they read about your business is complete, accurate and consistent in both languages. That's the part you can control."}},
+    {"@type":"Question","name":"We're not a clinic. Does this apply to us?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dental and aesthetic clinics in Muscat are our current pilot. The gaps we check apply to any business with a website and customers: law firms, car rentals, logistics, real estate, restaurants and retail."}},
+    {"@type":"Question","name":"Am I locked into the next steps after the audit?","acceptedAnswer":{"@type":"Answer","text":"No. Each step is a separate decision. You can stop after the audit with your report in hand."}},
+    {"@type":"Question","name":"Do you only do audits?","acceptedAnswer":{"@type":"Answer","text":"The audit is where we start. After it, we can also set up a WhatsApp agent, follow-up messages, video ads and review collection, only if the report shows they're worth it."}},
     {"@type":"Question","name":"How long does the audit take?","acceptedAnswer":{"@type":"Answer","text":"5 to 7 business days from when we start."}},
-    {"@type":"Question","name":"What if our website is in Arabic only, or English only?","acceptedAnswer":{"@type":"Answer","text":"Part of the audit specifically checks whether the business is represented consistently in both languages, since AI systems weigh both when deciding who to recommend."}}
+    {"@type":"Question","name":"Our website is only in Arabic, or only in English. Is that a problem?","acceptedAnswer":{"@type":"Answer","text":"It's one of the most common gaps. In our first audit, Gemini recommended the business in 3 of 3 English tests and 0 of 3 identical Arabic tests."}}
   ]
 }
 </script>
@@ -686,46 +98,1244 @@
   "@type": "FAQPage",
   "inLanguage": "ar",
   "mainEntity": [
-    {"@type":"Question","name":"ما أحد بعُمان يستخدم ChatGPT عشان يدور شركة.","acceptedAnswer":{"@type":"Answer","text":"بعض عملائك أكيد يستخدمونه حالياً، والعدد يزيد شهر بعد شهر."}},
-    {"@type":"Question","name":"إحنا أصلاً نسوي SEO. مو نفس الشي؟","acceptedAnswer":{"@type":"Answer","text":"لا. الـ SEO يخليك تظهر بقائمة روابط جوجل. هذا الموضوع مختلف — يهتم هل ChatGPT وGemini يذكرون شركتك مباشرة."}},
-    {"@type":"Question","name":"ليش أدفع مقابل تدقيق إذا المفروض يفيدني أصلاً؟","acceptedAnswer":{"@type":"Answer","text":"الشركاء المؤسسون يدفعون 50 ريال عماني رسوم تشخيص تأسيسية تُحتسب بالكامل من قيمة الإصلاح إذا كملت معنا، بدل السعر العادي 250 ر.ع."}},
-    {"@type":"Question","name":"إحنا مو عيادة — هل ينطبق علينا؟","acceptedAnswer":{"@type":"Answer","text":"أكيد. التجربة مع العيادات هي وين نطور فيها الطريقة حالياً، بس نفس الفجوات تأثر على أي شركة عندها موقع وعملاء."}},
-    {"@type":"Question","name":"بعد التدقيق، هل أصير ملزم بخطوة الإصلاح والاشتراك الشهري؟","acceptedAnswer":{"@type":"Answer","text":"لا. كل خطوة قرار مستقل."}},
-    {"@type":"Question","name":"كم يستغرق التدقيق؟","acceptedAnswer":{"@type":"Answer","text":"من 5 إلى 7 أيام عمل من بداية التدقيق."}},
-    {"@type":"Question","name":"إيش إذا موقعنا بالعربي بس، أو بالإنجليزي بس؟","acceptedAnswer":{"@type":"Answer","text":"جزء من التدقيق يفحص بالضبط هل شركتك موجودة بشكل متطابق باللغتين."}}
+    {"@type":"Question","name":"لا أحد في عُمان يستخدم ChatGPT للبحث عن نشاط تجاري. لماذا يهمّني هذا؟","acceptedAnswer":{"@type":"Answer","text":"بعض عملائك يستخدمونه بالفعل. والسؤال ليس هل يستخدمه الجميع اليوم، بل هل ستكون معلوماتك جاهزة قبل أن يبدأ أغلبهم."}},
+    {"@type":"Question","name":"نحن نعمل على تحسين محركات البحث (SEO) أصلًا. أليس هذا الشيء نفسه؟","acceptedAnswer":{"@type":"Answer","text":"لا. تحسين محركات البحث يرفع ترتيبك في قائمة روابط جوجل. أما الظهور في الذكاء الاصطناعي فيتعلّق بما إذا كان ChatGPT وGemini يذكران نشاطك مباشرة حين يطلب أحدهم توصية، وهذا يعتمد على بيانات مختلفة: المعلومات المنظّمة، والاتساق بين المنصّات، والتطابق بين العربية والإنجليزية."}},
+    {"@type":"Question","name":"لماذا أدفع مقابل تدقيق وهناك أدوات مجانية؟","acceptedAnswer":{"@type":"Answer","text":"الأدوات المجانية تفحص موقعك. أما تدقيقنا فيطرح على ChatGPT وGemini أسئلة عملائك باللغتين، ويقارنك بالأنشطة القريبة، ويسلّمك قائمة إصلاحات مرتّبة حسب الأولوية. ويدفع الشركاء المؤسسون رسوم تشخيص تأسيسية قدرها 50 ر.ع.، تُحتسب بالكامل من قيمة الإصلاح."}},
+    {"@type":"Question","name":"هل تضمنون ظهورنا في ChatGPT أو Gemini؟","acceptedAnswer":{"@type":"Answer","text":"لا. لا أحد يتحكّم فيما يقوله ChatGPT أو Gemini. ما نفعله هو أن نحرص على أن تكون المعلومات التي يقرآنها عن نشاطك كاملة ودقيقة ومتطابقة باللغتين، وهذا هو الجزء الذي يمكنك التحكّم فيه."}},
+    {"@type":"Question","name":"لسنا عيادة. هل ينطبق هذا علينا؟","acceptedAnswer":{"@type":"Answer","text":"نعم. عيادات الأسنان والتجميل في مسقط هي تجربتنا الحالية، لكن الفجوات التي نفحصها تنطبق على أي نشاط لديه موقع وعملاء: مكاتب المحاماة، وتأجير السيارات، والخدمات اللوجستية، والعقارات، والمطاعم، والتجزئة."}},
+    {"@type":"Question","name":"هل أصبح ملتزمًا بالخطوات التالية بعد التدقيق؟","acceptedAnswer":{"@type":"Answer","text":"لا. كل خطوة قرار مستقل، ويمكنك التوقّف بعد التدقيق والتقرير بين يديك."}},
+    {"@type":"Question","name":"هل تقدّمون التدقيق فقط؟","acceptedAnswer":{"@type":"Answer","text":"التدقيق هو نقطة البداية. وبعده يمكننا أيضًا تجهيز وكيل واتساب، ورسائل المتابعة، وإعلانات الفيديو، وجمع التقييمات، وذلك فقط إذا أظهر التقرير أنها تستحق."}},
+    {"@type":"Question","name":"كم يستغرق التدقيق؟","acceptedAnswer":{"@type":"Answer","text":"من 5 إلى 7 أيام عمل من تاريخ البدء."}},
+    {"@type":"Question","name":"موقعنا بالعربية فقط، أو بالإنجليزية فقط. هل هذه مشكلة؟","acceptedAnswer":{"@type":"Answer","text":"هذه من أكثر الفجوات شيوعًا. في أول تدقيق أجريناه، رشّح Gemini النشاط في 3 من 3 اختبارات بالإنجليزية، و0 من 3 اختبارات مطابقة بالعربية."}}
   ]
 }
 </script>
 
+<style>
+:root{
+  --blue:#1D5BA3; --teal:#17C9C9; --amber:#E67E22; --navy:#0F2D52; --lteal:#4FE0E0;
+  --blue-900:#0A2240; --blue-50:#EEF4FB; --blue-100:#DCE8F6; --ink:#0F2D52; --muted:#4A6285;
+  --white:#fff; --line:rgba(15,45,82,.12);
+  --f-en:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-ar-h:'Cairo','Geeza Pro','Segoe UI',Tahoma,sans-serif;
+  --f-ar-b:'Almarai','Geeza Pro','Segoe UI',Tahoma,sans-serif;
+  --wrap:1180px; --r-lg:28px; --r-md:16px; --r-sm:10px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth; scroll-padding-top:calc(76px + env(safe-area-inset-top,0px)); -webkit-text-size-adjust:100%}
+body{margin:0; background:var(--white); color:var(--ink); font-family:var(--f-en); font-size:1.0625rem; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+html[lang="ar"] body{font-family:var(--f-ar-b); line-height:1.85}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3,html[lang="ar"] .display{font-family:var(--f-ar-h)}
+img,svg{max-width:100%; display:block}
+a{color:inherit}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:3px solid var(--amber); outline-offset:3px; border-radius:6px}
+
+/* Bilingual switching */
+html[lang="en"] .ar{display:none !important}
+html[lang="ar"] .en{display:none !important}
+
+.wrap{width:min(100% - 2.5rem, var(--wrap)); margin-inline:auto}
+h1,h2,h3{margin:0; line-height:1.12; letter-spacing:-.02em; font-weight:700}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{letter-spacing:0; line-height:1.35}
+h2{font-size:clamp(1.9rem, 4.2vw, 3.1rem); max-width:22ch}
+h3{font-size:1.25rem; letter-spacing:-.01em}
+p{margin:0}
+.lede{font-size:clamp(1.05rem,1.6vw,1.2rem); color:var(--muted); max-width:58ch}
+section{position:relative}
+.sec{padding:clamp(4.5rem,9vw,7.5rem) 0}
+.sec-head{display:grid; gap:1.1rem; margin-bottom:clamp(2.5rem,5vw,4rem)}
+
+/* Buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:.6rem; min-height:52px; padding:.85rem 1.5rem; border-radius:999px; border:0; font-weight:600; font-size:1rem; text-decoration:none; transition:transform .2s ease, background-color .2s ease, box-shadow .2s ease}
+.btn-amber{background:var(--amber); color:#fff; box-shadow:0 10px 24px -10px rgba(230,126,34,.7)}
+.btn-amber:hover{background:#d06d17; transform:translateY(-2px)}
+.btn-ghost{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{border-color:var(--lteal); color:var(--lteal)}
+.btn-blue{background:var(--blue); color:#fff}
+.btn-blue:hover{background:var(--navy)}
+.btn svg{width:20px; height:20px; flex:none}
+html[dir="rtl"] .flip{transform:scaleX(-1)}
+
+/* ---------- Header ---------- */
+.site-head{position:fixed; inset-inline:0; top:0; z-index:50; padding-top:env(safe-area-inset-top,0px); transition:background-color .3s ease, box-shadow .3s ease}
+.site-head.solid{background:rgba(15,45,82,.92); -webkit-backdrop-filter:saturate(1.4) blur(14px); backdrop-filter:saturate(1.4) blur(14px); box-shadow:0 1px 0 rgba(255,255,255,.08)}
+.head-in{display:flex; align-items:center; justify-content:space-between; gap:1rem; height:72px}
+.brand{display:flex; align-items:center; gap:.65rem; text-decoration:none; color:#fff; font-weight:700; font-size:1.08rem; letter-spacing:-.01em}
+.brand svg{width:36px; height:36px}
+html[lang="ar"] .brand{font-family:var(--f-ar-h)}
+.nav{display:none; gap:clamp(1.1rem,1.6vw,1.8rem)}
+.nav a{color:rgba(255,255,255,.78); text-decoration:none; font-size:.95rem; font-weight:500}
+.nav a:hover{color:#fff}
+.head-actions{display:flex; align-items:center; gap:.6rem}
+.lang-btn{min-height:44px; min-width:44px; padding:0 .95rem; border-radius:999px; border:1.5px solid rgba(255,255,255,.3); background:transparent; color:#fff; font-weight:600; font-size:.95rem}
+.lang-btn:hover{border-color:var(--lteal); color:var(--lteal)}
+.lang-btn .en{font-family:var(--f-ar-h)}
+.head-cta{display:none; min-height:44px; padding:.55rem 1.1rem; font-size:.92rem}
+@media (min-width:900px){ .head-cta{display:inline-flex} }
+@media (min-width:1040px){ .nav{display:flex} }
+
+/* ---------- Hero ---------- */
+.hero{background:var(--navy); color:#fff; overflow:hidden; padding:calc(72px + env(safe-area-inset-top,0px) + clamp(2.5rem,6vw,5rem)) 0 clamp(4rem,8vw,6.5rem); isolation:isolate}
+.hero::before{content:""; position:absolute; inset:0; z-index:-1;
+  background:
+    radial-gradient(60rem 38rem at 85% 110%, rgba(29,91,163,.95), transparent 60%),
+    radial-gradient(34rem 24rem at 100% 0%, rgba(23,201,201,.20), transparent 70%)}
+.hero-grid{display:grid; gap:clamp(2.75rem,6vw,4rem); align-items:center}
+@media (min-width:980px){ .hero-grid{grid-template-columns:1.08fr .92fr} }
+.hero h1{font-size:clamp(2.2rem, 4.6vw, 3.5rem); line-height:1.08; letter-spacing:-.03em; max-width:19ch; text-wrap:balance}
+html[lang="ar"] .hero h1{line-height:1.3; letter-spacing:0; font-weight:800; max-width:16ch}
+.hero .lede{color:rgba(255,255,255,.78); margin-top:1.5rem}
+.hero-ctas{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2.2rem}
+.pilot-line{display:flex; align-items:center; gap:.75rem; margin-top:2.4rem; font-size:.95rem; color:rgba(255,255,255,.72)}
+.seats-mini{display:flex; gap:5px}
+.seats-mini i{width:10px; height:10px; border-radius:50%; background:var(--lteal); box-shadow:0 0 0 3px rgba(79,224,224,.16)}
+
+/* The AI answer demo: signature element */
+.ask{position:relative; background:#fff; color:var(--ink); border-radius:var(--r-lg); box-shadow:0 40px 80px -30px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); overflow:hidden}
+.ask-top{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 1.2rem; border-bottom:1px solid var(--line); background:var(--blue-50)}
+.ask-model{display:flex; align-items:center; gap:.55rem; font-weight:600; font-size:.92rem; color:var(--navy)}
+.ask-model b{width:26px; height:26px; border-radius:8px; background:var(--blue); display:grid; place-items:center}
+.ask-model b svg{width:15px; height:15px}
+.ask-tabs{display:flex; background:#fff; border:1px solid var(--line); border-radius:999px; padding:3px}
+.ask-tabs button{border:0; background:transparent; min-height:36px; padding:0 .9rem; border-radius:999px; font-size:.85rem; font-weight:600; color:var(--muted); font-family:var(--f-en)}
+.ask-tabs button[data-l="ar"]{font-family:var(--f-ar-h)}
+.ask-tabs button[aria-selected="true"]{background:var(--navy); color:#fff}
+.ask-body{--in:-10px; padding:1.4rem 1.2rem 1.3rem; min-height:440px; display:flex; flex-direction:column; gap:1rem}
+.ask-body[dir="rtl"]{--in:10px}
+@media (max-width:480px){ .ask-body{min-height:500px} }
+.ask-body[dir="rtl"]{font-family:var(--f-ar-b)}
+.q{align-self:flex-end; max-width:88%; background:var(--blue); color:#fff; padding:.8rem 1.05rem; border-radius:18px 18px 4px 18px; font-size:1rem; min-height:2.9em}
+.ask-body[dir="rtl"] .q{border-radius:18px 18px 18px 4px}
+.q .caret{display:inline-block; width:2px; height:1.05em; background:var(--lteal); vertical-align:-.15em; margin-inline-start:2px; animation:blink 1s steps(1) 6}
+@keyframes blink{50%{opacity:0}}
+.a{display:grid; gap:.6rem}
+.thinking{display:flex; gap:5px; padding:.4rem 0; opacity:0; transition:opacity .2s}
+.thinking.on{opacity:1}
+.thinking i{width:7px; height:7px; border-radius:50%; background:var(--teal); animation:dot 1s 2 ease-in-out}
+.thinking i:nth-child(2){animation-delay:.15s} .thinking i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,80%,100%{transform:translateY(0); opacity:.35} 40%{transform:translateY(-5px); opacity:1}}
+.a-intro{font-size:.93rem; color:var(--muted)}
+.rec{position:relative; overflow:hidden; display:flex; align-items:center; gap:.8rem; min-height:50px; padding:.75rem .85rem; border:1px solid var(--line); border-radius:var(--r-md); background:#fff; opacity:0; transform:translateX(var(--in)); transition:opacity .3s ease, transform .3s ease}
+.rec > *{position:relative; z-index:1}
+.rec.in{opacity:1; transform:none}
+.a .w{opacity:0; transition:opacity .22s ease}
+.a .w.in{opacity:1}
+.rec .n{flex:none; width:26px; height:26px; border-radius:50%; background:var(--blue-50); color:var(--blue); font-weight:700; font-size:.8rem; display:grid; place-items:center}
+.rec .blur{height:10px; border-radius:6px; background:linear-gradient(90deg,#c9d6e7,#e2eaf4); flex:1; max-width:var(--w,60%)}
+.rec.you::before{content:""; position:absolute; inset:0; background:rgba(23,201,201,.13); transform:scaleX(0); transform-origin:left; transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.rec.you::after{content:""; position:absolute; inset:0; border:1.5px solid var(--teal); border-radius:inherit; opacity:0; transition:opacity .3s ease .15s}
+.ask-body[dir="rtl"] .rec.you::before{transform-origin:right}
+.rec.you.hl::before{transform:none}
+.rec.you.hl::after{opacity:1}
+.rec.you.hl .n{background:var(--teal); color:#fff}
+.rec.rival strong{font-weight:700; font-size:.95rem; color:var(--navy)}
+.rec.you strong{font-weight:600; font-size:.95rem}
+.rec .tag{margin-inline-start:auto; font-size:.75rem; font-weight:700; color:#0c7f7f; background:rgba(23,201,201,.18); padding:.2rem .55rem; border-radius:999px; white-space:nowrap; opacity:0; transform:scale(.8); transition:opacity .25s ease .25s, transform .3s cubic-bezier(.3,1.5,.5,1) .25s}
+.rec.hl .tag{opacity:1; transform:none}
+.mark{justify-self:end; display:inline-flex; align-items:baseline; gap:.45rem; padding:.35rem .85rem; border-radius:999px; font-size:.82rem; font-weight:600; opacity:0; transform:scale(.9); transition:opacity .3s ease, transform .35s cubic-bezier(.3,1.4,.5,1)}
+.mark b{font-size:1.02rem; font-weight:700; font-family:var(--f-en); direction:ltr; unicode-bidi:isolate}
+.mark.good{background:rgba(23,201,201,.14); color:#0c7373}
+.mark.bad{background:rgba(214,69,69,.09); color:#b23a3a; border:1px solid rgba(214,69,69,.28)}
+.mark.in{opacity:1; transform:none}
+.missing{display:flex; align-items:center; gap:.7rem; padding:.8rem .9rem; border-radius:var(--r-md); border:1.5px dashed var(--amber); color:#a4520c; background:rgba(230,126,34,.07); font-weight:700; font-size:.93rem; opacity:0; transform:translateX(var(--in)); transition:opacity .35s ease, transform .35s ease}
+.missing.in{opacity:1; transform:none}
+.missing svg{width:20px; height:20px; flex:none}
+.ask-foot{padding:0 1.2rem 1.2rem; font-size:.8rem; color:var(--muted); line-height:1.5}
+.ask-foot b{color:var(--navy)}
+
+/* ---------- The Shift ---------- */
+.shift{background:var(--white)}
+.shift-grid{display:grid; gap:3rem; align-items:center}
+@media (min-width:900px){ .shift-grid{grid-template-columns:1fr 1fr} }
+.shift-vis{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:1rem}
+.shift-vis{--sd:1}
+html[dir="rtl"] .shift-vis{--sd:-1}
+.glinks{display:grid; gap:6px}
+.gl{display:grid; grid-template-columns:8px 1fr; gap:6px; align-items:center; transition:transform .45s cubic-bezier(.6,0,.35,1) calc(var(--i) * 16ms), opacity .4s ease calc(var(--i) * 16ms)}
+.gl > i{width:8px; height:8px; border-radius:50%; background:var(--blue-100)}
+.gl > span{display:grid; gap:3px}
+.gl b{display:block; height:7px; border-radius:4px; background:#86A9D6; width:var(--w,82%)}
+.gl em{display:block; height:5px; border-radius:3px; background:var(--blue-100); width:52%}
+.shift-vis.go .gl{opacity:.2; transform:translate(calc(var(--sd) * 14px), calc((4.5 - var(--i)) * 14px)) scale(.85,.45)}
+.mo .shift-vis .one-answer{opacity:0; transform:translateY(22px); transition:opacity .4s ease .4s, transform .5s cubic-bezier(.2,.8,.2,1) .4s}
+.mo .shift-vis.go .one-answer{opacity:1; transform:none}
+.one-answer .lines{display:grid; gap:5px; margin-top:.7rem}
+.one-answer .lines i{display:block; height:6px; border-radius:3px; background:rgba(255,255,255,.18)}
+.one-answer .lines i:last-child{width:60%}
+.col-cap{font-size:.82rem; color:var(--muted); margin-top:.8rem; font-weight:500}
+.shift-arrow{width:44px; height:44px; color:var(--teal)}
+.one-answer{background:var(--navy); color:#fff; border-radius:var(--r-md); padding:1rem; font-size:.9rem; line-height:1.5}
+.one-answer .dot{display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--lteal); margin-inline-end:.4rem}
+.shift-copy p + p{margin-top:1rem}
+.shift-copy .big{font-size:clamp(1.15rem,2vw,1.35rem); color:var(--ink); font-weight:500; max-width:40ch}
+html[lang="ar"] .shift-copy .big{font-weight:700}
+
+/* ---------- Problem ---------- */
+.problem{background:var(--blue-50)}
+.gaps{display:grid; gap:1.25rem}
+@media (min-width:900px){ .gaps{grid-template-columns:1.2fr 1fr; grid-template-rows:auto auto} .gap-a{grid-row:span 2} }
+.gap,.svc{background:#fff; border-radius:var(--r-lg); padding:clamp(1.5rem,3vw,2.2rem); display:grid; gap:1.1rem; align-content:start; border:1px solid var(--line)}
+.gap p,.svc p{color:var(--muted)}
+/* Before/After state label for the gap demos */
+.fix-state{display:grid; font-size:.8rem; font-weight:600}
+.fix-state > span{grid-area:1/1; display:inline-flex; align-items:center; gap:.4rem; transition:opacity .3s ease}
+.fix-state .st-a{color:#a4520c}
+.fix-state .st-b{color:#0c7373; opacity:0}
+.fix-state .st-b svg{width:15px; height:15px}
+.fixbox{display:grid; gap:.6rem}
+.fixbox.fixed .st-a{opacity:0}
+.fixbox.fixed .st-b{opacity:1}
+.code{direction:ltr; text-align:left; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:.82rem; line-height:1.9; background:var(--navy); color:#cfe0f5; border-radius:var(--r-md); padding:1.1rem 1.2rem; overflow-x:auto}
+.code .k{color:var(--lteal)} .code .v{color:#fff}
+.code .miss{color:var(--amber); font-weight:700}
+.code .slot{display:inline-block; position:relative; transition:opacity .15s ease}
+.code .slot.out{opacity:0}
+.code .slot::after{content:""; position:absolute; inset:-2px -5px; border-radius:5px; background:rgba(52,211,120,.5); opacity:0; pointer-events:none}
+.code .slot.ok::after{animation:flash .6s ease-out 1}
+.code .slot.done::after{animation:none}
+.code .slot.ok .v{color:#b9f3cf}
+@keyframes flash{0%{opacity:0} 25%{opacity:1} 100%{opacity:0}}
+@media (max-width:420px){ .code{padding:1rem .85rem; font-size:.72rem} }
+.code .row{display:block; white-space:nowrap}
+.pair{display:grid; gap:.6rem}
+.pair div{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.7rem .9rem; border-radius:var(--r-sm); background:var(--blue-50); font-size:.9rem}
+.pair div span:first-child{font-weight:600; color:var(--navy)}
+.pair .ar-row{font-family:var(--f-ar-b); direction:rtl}
+.pair .x{color:#a4520c; font-weight:700}
+.names{position:relative; display:flex; flex-wrap:wrap; gap:.5rem}
+.names .nt{transition:transform .5s cubic-bezier(.6,0,.25,1), opacity .3s ease .22s}
+.names.go .nt{transform:translate(var(--tx,0px),var(--ty,0px)) scale(.6); opacity:0}
+.verified{position:absolute; left:50%; top:50%; width:max-content; max-width:100%; display:flex; align-items:center; gap:.65rem; padding:.5rem 1rem .5rem .55rem; border-radius:999px; background:#fff; border:1.5px solid var(--teal); box-shadow:0 10px 24px -14px rgba(15,45,82,.5); opacity:0; transform:translate(-50%,-50%) scale(.85); transition:opacity .3s ease, transform .4s cubic-bezier(.2,.8,.2,1); pointer-events:none}
+html[dir="rtl"] .verified{padding:.5rem .55rem .5rem 1rem}
+.names.done .verified{opacity:1; transform:translate(-50%,-50%)}
+.verified .ck{flex:none; width:28px; height:28px; border-radius:50%; background:var(--teal); color:#fff; display:grid; place-items:center; transform:scale(0); transition:transform .35s cubic-bezier(.3,1.6,.5,1) .2s}
+.verified .ck svg{width:16px; height:16px}
+.names.done .verified .ck{transform:none}
+.verified b{display:block; font-weight:600; color:var(--navy); font-size:.95rem; line-height:1.3}
+.verified small{display:block; font-size:.72rem; color:var(--muted); line-height:1.35}
+.names > span{padding:.45rem .8rem; border-radius:999px; font-size:.86rem; background:var(--blue-50); color:var(--navy); border:1px solid var(--blue-100)}
+.names > span small{display:block; font-size:.68rem; color:var(--muted)}
+.names .arn{font-family:var(--f-ar-b)}
+
+/* ---------- Sample audit ---------- */
+.audit{background:var(--blue); color:#fff; overflow:hidden}
+.audit .lede{color:rgba(255,255,255,.8)}
+.report{background:#fff; color:var(--ink); border-radius:var(--r-lg); overflow:hidden; box-shadow:0 50px 90px -40px rgba(5,20,45,.8)}
+.report-head{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1.2rem clamp(1.2rem,3vw,2rem); border-bottom:1px solid var(--line)}
+.report-title{display:flex; align-items:center; gap:.7rem; font-weight:600}
+.report-title svg{width:28px; height:28px}
+.report-title small{display:block; font-weight:400; font-size:.8rem; color:var(--muted)}
+.rtabs{display:flex; gap:.3rem; background:var(--blue-50); padding:4px; border-radius:999px; overflow-x:auto; max-width:100%}
+.rtabs button{border:0; background:transparent; min-height:40px; padding:0 1rem; border-radius:999px; font-weight:600; font-size:.88rem; color:var(--muted); white-space:nowrap}
+html[lang="ar"] .rtabs button{font-family:var(--f-ar-h)}
+.rtabs button[aria-selected="true"]{background:#fff; color:var(--navy); box-shadow:0 2px 8px -3px rgba(15,45,82,.3)}
+@media (max-width:420px){ .rtabs{gap:.2rem} .rtabs button{padding:0 .7rem; font-size:.82rem} }
+.rpanel{padding:clamp(1.4rem,3.5vw,2.5rem)}
+.rpanel[hidden]{display:none}
+.score-grid{display:grid; gap:2rem; align-items:center}
+@media (min-width:860px){ .score-grid{grid-template-columns:280px 1fr} }
+.gauge{position:relative; width:min(260px,100%); margin-inline:auto; aspect-ratio:1}
+.gauge svg{width:100%; height:100%; transform:rotate(-90deg)}
+.gauge .track{stroke:var(--blue-50)}
+.gauge .val{stroke:var(--amber); stroke-linecap:round; transform-box:view-box; transform-origin:60px 60px}
+.mo .gauge .val{opacity:0; transform:rotate(-70deg); transition:opacity .3s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
+.mo .gauge.in .val{opacity:1; transform:none}
+.gauge-num{position:absolute; inset:0; display:grid; place-content:center; text-align:center}
+.gauge-num b{font-size:4.2rem; line-height:1; font-weight:700; color:var(--navy); letter-spacing:-.04em; font-variant-numeric:tabular-nums; font-family:var(--f-en)}
+.gauge-num span{font-size:.85rem; color:var(--muted); margin-top:.4rem}
+.metrics{display:grid; gap:1rem}
+@media (min-width:600px){ .metrics{grid-template-columns:1fr 1fr} }
+.metric{padding:1.2rem 1.25rem; border-radius:var(--r-md); background:var(--blue-50)}
+.metric b{display:block; font-size:2rem; line-height:1.1; font-weight:700; color:var(--blue); font-family:var(--f-en); letter-spacing:-.02em}
+.metric p{font-size:.9rem; color:var(--muted); margin-top:.35rem}
+.metric.wide{grid-column:1/-1; background:var(--navy); color:#fff}
+.metric.wide p{color:rgba(255,255,255,.75)}
+.langbars{display:grid; gap:.75rem; margin-top:1rem}
+.lb{display:grid; grid-template-columns:5.5rem 1fr 3rem; align-items:center; gap:.8rem; font-size:.9rem}
+.lb .bar{display:grid; grid-template-columns:repeat(3,1fr); gap:5px}
+.lb .bar i{position:relative; overflow:hidden; height:14px; border-radius:4px; background:rgba(255,255,255,.14)}
+.lb.en-b .bar i::after{content:""; position:absolute; inset:0; background:var(--lteal); transform:scaleX(0); transform-origin:left; transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+html[dir="rtl"] .lb.en-b .bar i::after{transform-origin:right}
+.lb.en-b .bar i.on::after{transform:none}
+.lb.ar-b .bar i{border:1.5px dashed rgba(230,126,34,.8); background:transparent}
+.metric .lb b{display:inline; font-size:.95rem; color:#fff; font-family:var(--f-en); text-align:end; letter-spacing:0}
+.comp{display:grid; gap:1.5rem}
+@media (min-width:860px){ .comp{grid-template-columns:1fr 1fr; align-items:center} }
+.comp-rows{display:grid; gap:.6rem}
+.comp-row{display:grid; grid-template-columns:1fr auto auto; gap:1rem; align-items:center; padding:.8rem 1rem; border-radius:var(--r-sm); background:var(--blue-50); font-size:.9rem}
+.comp-row.you{background:rgba(230,126,34,.08); border:1px solid rgba(230,126,34,.35)}
+.comp-row .blur{height:10px; border-radius:6px; background:#c9d6e7; width:var(--w,70%)}
+.dotset{display:flex; gap:4px}
+.dotset i{width:12px; height:12px; border-radius:3px; background:var(--teal)}
+.dotset i.off{background:transparent; border:1.5px solid var(--blue-100)}
+.comp-legend{font-size:.8rem; color:var(--muted)}
+.fixes{display:grid; gap:.9rem; counter-reset:fx}
+.fix{display:grid; grid-template-columns:auto 1fr; gap:1rem; padding:1.1rem 1.2rem; border-radius:var(--r-md); border:1px solid var(--line)}
+.fix::before{counter-increment:fx; content:counter(fx); width:34px; height:34px; border-radius:50%; background:var(--teal); color:#fff; font-weight:700; display:grid; place-items:center; font-family:var(--f-en)}
+.fix h3{font-size:1.05rem}
+.fix p{font-size:.92rem; color:var(--muted); margin-top:.25rem}
+.fix .gapref{display:inline-block; margin-top:.6rem; font-size:.75rem; font-weight:600; color:var(--blue); background:var(--blue-50); padding:.2rem .6rem; border-radius:999px}
+.audit-note{margin-top:1.4rem; font-size:.9rem; color:rgba(255,255,255,.72); max-width:70ch}
+
+/* ---------- Ladder ---------- */
+.ladder{display:grid; gap:1.25rem; align-items:end}
+@media (min-width:960px){ .ladder{grid-template-columns:repeat(3,1fr)} }
+.step{position:relative; border-radius:var(--r-lg); padding:clamp(1.5rem,3vw,2rem); display:grid; gap:1rem; align-content:start}
+.step-1{background:var(--blue-50)}
+.step-2{background:var(--blue); color:#fff}
+.step-3{background:var(--navy); color:#fff}
+@media (min-width:960px){ .step-1{min-height:390px} .step-2{min-height:450px} .step-3{min-height:510px} }
+.step-k{display:flex; align-items:center; gap:.6rem; font-weight:600; font-size:.9rem; opacity:.85}
+.step-k i{width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-style:normal; font-weight:700; background:rgba(29,91,163,.12); color:var(--blue); font-family:var(--f-en)}
+.step-2 .step-k i,.step-3 .step-k i{background:rgba(79,224,224,.16); color:var(--lteal)}
+.price{display:grid; gap:.2rem}
+.price b{font-size:clamp(2rem,3.4vw,2.6rem); font-weight:700; letter-spacing:-.03em; line-height:1.05; font-family:var(--f-en)}
+.price > span{font-size:.88rem; opacity:.75}
+.price .was{text-decoration:line-through; opacity:.6}
+.step p{font-size:.95rem; opacity:.85}
+.fp-pill{justify-self:start; font-size:.78rem; font-weight:700; padding:.3rem .7rem; border-radius:999px; background:var(--amber); color:#fff}
+.ladder-note{margin-top:1.6rem; font-size:.95rem; color:var(--muted); max-width:68ch}
+
+/* ---------- Process ---------- */
+.process{background:var(--blue-50)}
+.proc{display:grid; gap:0; position:relative}
+@media (min-width:900px){ .proc{grid-template-columns:repeat(4,1fr); gap:1.5rem} }
+.proc li{list-style:none; position:relative; padding:0 0 2.2rem 0; padding-inline-start:3.6rem}
+@media (min-width:900px){ .proc li{padding:4rem 0 0} }
+.proc li::before{content:attr(data-n); position:absolute; inset-inline-start:0; top:0; width:42px; height:42px; border-radius:50%; background:#fff; border:2px solid var(--blue); color:var(--blue); display:grid; place-items:center; font-weight:700; font-family:var(--f-en); z-index:1}
+.proc li::after{content:""; position:absolute; inset-inline-start:20px; top:42px; bottom:0; width:2px; background:var(--blue-100)}
+.proc li:last-child::after{display:none}
+@media (min-width:900px){ .proc li::after{top:20px; bottom:auto; inset-inline-start:42px; inset-inline-end:-1.5rem; width:auto; height:2px} }
+.proc h3{font-size:1.1rem; margin-bottom:.4rem}
+.proc p{font-size:.95rem; color:var(--muted)}
+.proc{padding:0; margin:0}
+
+/* ---------- Sectors ---------- */
+.sectors-grid{display:grid; gap:2.5rem; align-items:center}
+@media (min-width:960px){ .sectors-grid{grid-template-columns:1fr 1fr} }
+.chips{display:flex; flex-wrap:wrap; gap:.6rem}
+.chip{border:1.5px solid var(--blue-100); background:#fff; min-height:46px; padding:.5rem 1rem; border-radius:999px; font-weight:500; font-size:.95rem; color:var(--navy); display:inline-flex; align-items:center; gap:.5rem; transition:border-color .2s, background-color .2s}
+.chip:hover{border-color:var(--blue)}
+.chip[aria-pressed="true"]{background:var(--blue); border-color:var(--blue); color:#fff}
+.chip .pilot{font-size:.68rem; font-weight:700; background:var(--amber); color:#fff; padding:.12rem .45rem; border-radius:999px}
+.try{background:var(--navy); border-radius:var(--r-lg); padding:clamp(1.4rem,3vw,2rem); color:#fff; display:grid; gap:1rem}
+.try-label{font-size:.85rem; color:rgba(255,255,255,.65)}
+.try-q{font-size:clamp(1.2rem,2.2vw,1.5rem); font-weight:600; line-height:1.4; min-height:4.2em}
+.try-q.ar-q{font-family:var(--f-ar-h); direction:rtl; text-align:right}
+.try-q .caret{display:inline-block; width:2px; height:1em; background:var(--lteal); vertical-align:-.1em; animation:blink 1s steps(1) 4; margin-inline-start:3px}
+.try-q-alt{font-size:1rem; color:rgba(255,255,255,.62); min-height:1.6em}
+.try-q-alt.ar-q{font-family:var(--f-ar-b); direction:rtl; text-align:right}
+.try-note{display:flex; gap:.6rem; align-items:flex-start; padding:.7rem .9rem; border-radius:var(--r-sm); background:rgba(79,224,224,.1); font-size:.92rem; color:#fff}
+.try-note[hidden]{display:none}
+.try-note svg{flex:none; width:18px; height:18px; margin-top:.2em; color:var(--lteal)}
+.try-note.ar-q{font-family:var(--f-ar-b)}
+.try-foot{font-size:.9rem; color:var(--lteal); border-top:1px solid rgba(255,255,255,.12); padding-top:1rem}
+.pilot-note{margin-top:1.5rem; padding:1rem 1.2rem; border-inline-start:4px solid var(--amber); background:rgba(230,126,34,.06); border-radius:0 var(--r-sm) var(--r-sm) 0; font-size:.95rem; color:var(--navy)}
+html[dir="rtl"] .pilot-note{border-radius:var(--r-sm) 0 0 var(--r-sm)}
+
+/* ---------- Founding Partner ---------- */
+.fp{background:var(--navy); color:#fff; overflow:hidden}
+.fp .lede{color:rgba(255,255,255,.78)}
+.fp-grid{display:grid; gap:3rem}
+@media (min-width:960px){ .fp-grid{grid-template-columns:1fr 1fr; align-items:start} }
+.seats{display:grid; grid-template-columns:repeat(5,1fr); gap:clamp(.5rem,1.5vw,1rem); margin:2rem 0 1rem; max-width:440px}
+.seat{aspect-ratio:1; border-radius:50%; border:2px solid var(--lteal); display:grid; place-items:center; position:relative; background:rgba(79,224,224,.06)}
+.seat::after{content:""; width:28%; height:28%; border-radius:50%; background:var(--lteal); box-shadow:0 0 18px var(--lteal)}
+.seats-cap{font-weight:600; font-size:1.05rem}
+.seats-cap .n{color:var(--lteal)}
+.incl{list-style:none; margin:0; padding:0; display:grid; gap:1rem}
+.incl li{display:grid; grid-template-columns:28px 1fr; gap:.9rem; align-items:start; padding-bottom:1rem; border-bottom:1px solid rgba(255,255,255,.1)}
+.incl svg{width:24px; height:24px; color:var(--lteal); margin-top:3px}
+.fee{margin-top:1.6rem; padding:1.2rem 1.3rem; border-radius:var(--r-md); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); font-size:.95rem; color:rgba(255,255,255,.85)}
+.fee b{color:#fff}
+
+/* ---------- FAQ ---------- */
+.faq-list{display:grid; gap:.75rem; max-width:860px}
+.qa{border:1px solid var(--line); border-radius:var(--r-md); background:#fff; overflow:hidden}
+.qa button{width:100%; display:flex; justify-content:space-between; align-items:center; gap:1rem; text-align:start; background:transparent; border:0; padding:1.15rem 1.3rem; font-weight:600; font-size:1.02rem; color:var(--navy); min-height:60px}
+html[lang="ar"] .qa button{font-family:var(--f-ar-h)}
+.qa .pm{flex:none; width:30px; height:30px; border-radius:50%; background:var(--blue-50); position:relative; transition:background-color .2s}
+.qa .pm::before,.qa .pm::after{content:""; position:absolute; left:50%; top:50%; width:12px; height:2px; background:var(--blue); transform:translate(-50%,-50%); transition:transform .25s ease}
+.qa .pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+.qa[data-open="true"] .pm{background:var(--blue)}
+.qa[data-open="true"] .pm::before,.qa[data-open="true"] .pm::after{background:#fff}
+.qa[data-open="true"] .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.qa .ans{display:grid; grid-template-rows:0fr; transition:grid-template-rows .3s ease}
+.qa[data-open="true"] .ans{grid-template-rows:1fr}
+.qa .ans > div{overflow:hidden}
+.qa .ans p{padding:0 1.3rem 1.25rem; color:var(--muted); max-width:68ch}
+
+/* ---------- Final CTA ---------- */
+.final{background:var(--blue); color:#fff; text-align:center; overflow:hidden; isolation:isolate}
+.final::before{content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(40rem 22rem at 50% 120%, rgba(23,201,201,.35), transparent 70%)}
+.final h2{margin-inline:auto; max-width:20ch}
+.final .lede{color:rgba(255,255,255,.8); margin:1.2rem auto 0}
+.final-ctas{display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-top:2.4rem}
+.contact-alt{margin-top:1.6rem; font-size:.95rem; color:rgba(255,255,255,.75)}
+.contact-alt a{color:#fff; font-weight:600}
+
+footer{background:var(--blue-900); color:rgba(255,255,255,.65); padding:2.4rem 0; font-size:.88rem}
+.foot-in{display:flex; flex-wrap:wrap; gap:1rem 2rem; justify-content:space-between; align-items:center}
+footer .brand{font-size:1rem}
+footer .brand svg{width:30px; height:30px}
+.foot-links{display:flex; gap:1.4rem}
+.foot-links a{color:rgba(255,255,255,.75); text-decoration:none}
+.foot-links a:hover{color:var(--lteal)}
+
+/* Sticky mobile CTA */
+.mcta{position:fixed; inset-inline:.75rem; bottom:calc(.75rem + env(safe-area-inset-bottom,0px)); z-index:40; display:flex; gap:.5rem; transform:translateY(160%); transition:transform .35s ease}
+.mcta.show{transform:none}
+.mcta .btn{flex:1; min-height:54px; box-shadow:0 14px 30px -10px rgba(15,45,82,.6)}
+@media (min-width:900px){ .mcta{display:none} }
+
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.sr:focus{position:fixed; top:1rem; inset-inline-start:1rem; width:auto; height:auto; clip:auto; padding:.6rem 1rem; background:#fff; color:var(--navy); z-index:100; border-radius:8px}
+
+/* ---------- Services ---------- */
+.svc-grid{display:grid; gap:1.25rem}
+@media (min-width:720px){ .svc-grid{grid-template-columns:1fr 1fr} }
+.svc-top{display:flex; align-items:center; justify-content:space-between; gap:.8rem; flex-wrap:wrap}
+.svc-ic{width:46px; height:46px; border-radius:var(--r-sm); background:var(--blue-50); color:var(--blue); display:grid; place-items:center}
+.svc-ic svg{width:24px; height:24px}
+.svc-tag{font-size:.76rem; font-weight:600; color:#0c7373; background:rgba(23,201,201,.13); padding:.28rem .7rem; border-radius:999px}
+.svc-foot{display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.5rem; margin-top:2rem}
+.svc-foot p{font-size:1rem; color:var(--navy); font-weight:500}
+
+/* ---------- Micro-motion ---------- */
+.mo .rv{opacity:0; transform:translateY(12px)}
+.mo .rv.in{opacity:1; transform:none; transition:opacity .5s ease var(--d,0ms), transform .5s cubic-bezier(.2,.8,.2,1) var(--d,0ms)}
+.gap,.svc,.step,.fix{transition:transform .2s ease}
+@media (hover:hover){ .gap:hover,.svc:hover,.step:hover,.fix:hover{transform:translateY(-4px)} }
+.btn-sheen{position:relative; overflow:hidden; isolation:isolate}
+.btn-sheen::after{content:""; position:absolute; top:0; bottom:0; left:0; width:55%; z-index:-1; pointer-events:none; background:linear-gradient(100deg, transparent, rgba(255,255,255,.42), transparent); transform:translateX(-120%); animation:sheen .6s ease-out 3s 1 forwards}
+html[dir="rtl"] .btn-sheen::after{left:auto; right:0; transform:translateX(120%); animation-name:sheenR}
+@keyframes sheen{to{transform:translateX(300%)}}
+@keyframes sheenR{to{transform:translateX(-300%)}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; transition-delay:0s !important}
+  html{scroll-behavior:auto}
+  .btn-sheen::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<a class="sr" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Catalyst Oman home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="#fff" stroke-width="4"/><path d="M20 32h22M34 23l9 9-9 9" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="51" cy="13" r="6.5" fill="#17C9C9"/></svg>
+      <span class="en">Catalyst Oman</span><span class="ar">كاتاليست عُمان</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#sample-audit"><span class="en">Sample audit</span><span class="ar">نموذج التدقيق</span></a>
+      <a href="#how-it-works"><span class="en">Pricing</span><span class="ar">الأسعار</span></a>
+      <a href="#who-its-for"><span class="en">Sectors</span><span class="ar">القطاعات</span></a>
+      <a href="#services"><span class="en">Services</span><span class="ar">الخدمات</span></a>
+      <a href="#faq"><span class="en">FAQ</span><span class="ar">الأسئلة</span></a>
+    </nav>
+    <div class="head-actions">
+      <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">
+        <span class="en" lang="ar">عربي</span><span class="ar" lang="en">English</span>
+      </button>
+      <a class="btn btn-amber head-cta" href="#founding-partner"><span class="en">Claim a spot</span><span class="ar">احجز مقعدك</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero" id="hero" aria-labelledby="hero-h">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 id="hero-h" class="display">
+        <span class="en">When your customers ask AI for a recommendation, does your business come up?</span>
+        <span class="ar">حين يسأل عملاؤك الذكاء الاصطناعي عن توصية، هل يظهر اسم نشاطك؟</span>
+      </h1>
+      <p class="lede">
+        <span class="en">Your customers can now ask ChatGPT or Gemini which business to call, and act on the first answer. We check whether you're in that answer, in English and in Arabic, and correct the information that keeps you out.</span>
+        <span class="ar">صار بإمكان عملائك أن يسألوا ChatGPT أو Gemini عن الجهة التي يتواصلون معها، ويأخذون بأول إجابة تظهر لهم. نتحقّق مما إذا كان نشاطك ضمن هذه الإجابة، بالعربية والإنجليزية، ونصحّح المعلومات التي تُبقيه خارجها.</span>
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-amber btn-sheen" href="#founding-partner"><span class="en">Claim a Founding Partner Spot</span><span class="ar">احجز مقعدك كشريك مؤسس</span></a>
+        <a class="btn btn-ghost" href="#sample-audit"><span class="en">See a sample audit</span><span class="ar">شاهد نموذج التدقيق</span></a>
+      </div>
+      <div class="pilot-line">
+        <span class="seats-mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="en">Muscat pilot: 5 of 5 Founding Partner spots open</span>
+        <span class="ar">المرحلة التجريبية في مسقط: 5 من 5 مقاعد للشركاء المؤسسين متاحة</span>
+      </div>
+    </div>
+
+    <!-- Signature: the same question, two languages -->
+    <figure class="ask" aria-label="Illustration: the same question asked in English and Arabic" style="margin:0">
+      <div class="ask-top">
+        <div class="ask-model"><b aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></b>Gemini</div>
+        <div class="ask-tabs" role="tablist" aria-label="Question language">
+          <button type="button" role="tab" data-l="en" aria-selected="true">English</button>
+          <button type="button" role="tab" data-l="ar" aria-selected="false" lang="ar">العربية</button>
+        </div>
+      </div>
+      <div class="ask-body" id="askBody" dir="ltr" aria-hidden="true">
+        <div class="q" id="askQ"></div>
+        <div class="a" id="askA"></div>
+      </div>
+      <figcaption class="ask-foot">
+        <span class="en"><b>Illustration from our first audit.</b> Gemini, asked for a dental clinic in Qurum, recommended the clinic in 3 of 3 English tests and 0 of 3 identical Arabic tests.</span>
+        <span class="ar"><b>توضيح من أول تدقيق أجريناه.</b> عند سؤال Gemini عن عيادة أسنان في القرم، رشّح العيادة في 3 من 3 اختبارات بالإنجليزية، و0 من 3 اختبارات مطابقة بالعربية.</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 2. THE SHIFT ============ -->
+<section class="sec shift" id="shift" aria-labelledby="shift-h">
+  <div class="wrap shift-grid">
+    <div class="shift-copy">
+      <h2 id="shift-h" style="margin-bottom:1.4rem">
+        <span class="en">Search used to be ten links. Now it's one answer.</span>
+        <span class="ar">كان البحث عشرة روابط. اليوم صار إجابة واحدة.</span>
+      </h2>
+      <p class="big">
+        <span class="en">A customer opens ChatGPT or Gemini, asks one question, and acts on what comes back.</span>
+        <span class="ar">يفتح العميل ChatGPT أو Gemini، يطرح سؤالًا واحدًا، ويأخذ بالإجابة التي تصله.</span>
+      </p>
+      <p class="lede">
+        <span class="en">That answer either names your business or names someone else. There is no second page to scroll to, whether you run a clinic, a law firm, a car rental or a restaurant.</span>
+        <span class="ar">هذه الإجابة إما أن تذكر نشاطك أو تذكر غيرك. لا توجد صفحة ثانية يمرّ عليها العميل، سواء كنت تدير عيادة أو مكتب محاماة أو شركة تأجير سيارات أو مطعمًا.</span>
+      </p>
+    </div>
+    <div class="shift-vis" id="shiftVis" aria-hidden="true">
+      <div>
+        <div class="glinks"><span class="gl" style="--i:0;--w:86%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:1;--w:72%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:2;--w:90%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:3;--w:64%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:4;--w:80%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:5;--w:70%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:6;--w:88%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:7;--w:60%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:8;--w:78%"><i></i><span><b></b><em></em></span></span><span class="gl" style="--i:9;--w:68%"><i></i><span><b></b><em></em></span></span></div>
+        <div class="col-cap"><span class="en">Google: ten links</span><span class="ar">جوجل: عشرة روابط</span></div>
+      </div>
+      <svg class="shift-arrow flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      <div>
+        <div class="one-answer"><span class="dot"></span><span class="en">"I'd recommend…"</span><span class="ar">«أنصحك بـ…»</span><span class="lines"><i></i><i></i></span></div>
+        <div class="col-cap"><span class="en">ChatGPT and Gemini: one answer</span><span class="ar">ChatGPT وGemini: إجابة واحدة</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. THE PROBLEM ============ -->
+<section class="sec problem" id="problem" aria-labelledby="problem-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="problem-h">
+        <span class="en">Why AI leaves most Omani businesses out</span>
+        <span class="ar">لماذا يُغفل الذكاء الاصطناعي أغلب الأنشطة العُمانية</span>
+      </h2>
+      <p class="lede">
+        <span class="en">It usually comes down to three gaps. None of them is visible when you look at your own website.</span>
+        <span class="ar">السبب غالبًا ثلاث فجوات، ولا تظهر أيٌّ منها حين تنظر إلى موقعك بنفسك.</span>
+      </p>
+    </div>
+    <div class="gaps">
+      <article class="gap gap-a">
+        <h3><span class="en">Missing structured data</span><span class="ar">بيانات منظّمة ناقصة</span></h3>
+        <p>
+          <span class="en">Your website may look complete to a person. To an AI system reading the code, your hours, services and location are often missing, buried in images, or inconsistent.</span>
+          <span class="ar">قد يبدو موقعك مكتملًا لعين الزائر. لكن حين يقرأ نظام الذكاء الاصطناعي الشيفرة، كثيرًا ما تكون ساعات العمل والخدمات والموقع ناقصة، أو مدفونة داخل الصور، أو غير متطابقة.</span>
+        </p>
+        <div class="fixbox" id="codeBox">
+          <div class="fix-state" aria-hidden="true">
+            <span class="st-a"><span class="en">What AI reads today</span><span class="ar">ما يقرؤه الذكاء الاصطناعي اليوم</span></span>
+            <span class="st-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span class="en">After the Fix</span><span class="ar">بعد الإصلاح</span></span>
+          </div>
+          <div class="code" aria-label="Example of what an AI system reads">
+            <span class="row">{ <span class="k">"@type"</span>: <span class="v">"LocalBusiness"</span>,</span>
+            <span class="row">&nbsp;&nbsp;<span class="k">"name"</span>: <span class="v">"Your Business"</span>,</span>
+            <span class="row">&nbsp;&nbsp;<span class="k">"openingHours"</span>: <span class="slot" data-val='"Sa-Th 09:00-21:00"'><span class="miss">— not found</span></span>,</span>
+            <span class="row">&nbsp;&nbsp;<span class="k">"address"</span>: <span class="slot" data-val='"Qurum, Muscat, OM"'><span class="miss">— not found</span></span>,</span>
+            <span class="row">&nbsp;&nbsp;<span class="k">"knowsLanguage"</span>: <span class="slot" data-val='["en","ar"]'><span class="v">"en"</span> <span class="miss">// no Arabic</span></span></span>
+            <span class="row">}</span>
+          </div>
+        </div>
+      </article>
+      <article class="gap">
+        <h3><span class="en">Bilingual gaps</span><span class="ar">فجوة بين اللغتين</span></h3>
+        <p>
+          <span class="en">When your Arabic and English information disagree, or one language is missing, AI systems rely on whichever version they trust more.</span>
+          <span class="ar">حين تختلف معلوماتك بالعربية عنها بالإنجليزية، أو تغيب إحدى اللغتين، يعتمد الذكاء الاصطناعي على النسخة التي يثق بها أكثر.</span>
+        </p>
+        <div class="pair" aria-label="Example of mismatched hours">
+          <div><span>EN</span><span>Sat–Thu, 9am–9pm</span></div>
+          <div class="ar-row"><span>عربي</span><span class="x">السبت–الأربعاء، 10ص–8م</span></div>
+        </div>
+      </article>
+      <article class="gap">
+        <h3><span class="en">Fragmented identity</span><span class="ar">هوية مبعثرة</span></h3>
+        <p>
+          <span class="en">Different names, numbers or addresses across Google, your website and social pages read to AI as different businesses, or as an unreliable one.</span>
+          <span class="ar">اختلاف الاسم أو الرقم أو العنوان بين جوجل وموقعك وصفحات التواصل يجعل الذكاء الاصطناعي يراها أنشطة مختلفة، أو نشاطًا غير موثوق.</span>
+        </p>
+        <div class="fixbox" id="namesBox">
+          <div class="fix-state" aria-hidden="true">
+            <span class="st-a"><span class="en">Four names today</span><span class="ar">أربعة أسماء اليوم</span></span>
+            <span class="st-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span class="en">After the Fix</span><span class="ar">بعد الإصلاح</span></span>
+          </div>
+          <div class="names" id="namesFix" aria-label="Example of four name variants">
+            <span class="nt"><small><span class="en">Google</span><span class="ar">جوجل</span></small>Your Business</span>
+            <span class="nt"><small><span class="en">Website</span><span class="ar">الموقع</span></small>Your Business LLC</span>
+            <span class="nt"><small>Instagram</small>yourbusiness.om</span>
+            <span class="nt arn"><small><span class="en">AI answer</span><span class="ar">إجابة الذكاء الاصطناعي</span></small>يور بزنس</span>
+            <div class="verified" aria-hidden="true"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg></span><span><b>Your Business</b><small><span class="en">One name on Google, website, Instagram and AI</span><span class="ar">اسم واحد على جوجل والموقع وإنستغرام والذكاء الاصطناعي</span></small></span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAMPLE AUDIT ============ -->
+<section class="sec audit" id="sample-audit" aria-labelledby="audit-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="audit-h">
+        <span class="en">What your audit report looks like</span>
+        <span class="ar">هكذا يبدو تقرير التدقيق</span>
+      </h2>
+      <p class="lede">
+        <span class="en">These figures come from our first audit, a dental clinic in Muscat, shown with the clinic's name removed.</span>
+        <span class="ar">هذه الأرقام من أول تدقيق أجريناه، لعيادة أسنان في مسقط، معروضة دون اسم العيادة.</span>
+      </p>
+    </div>
+
+    <div class="report">
+      <div class="report-head">
+        <div class="report-title">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="#1D5BA3" stroke-width="4"/><path d="M20 32h22M34 23l9 9-9 9" stroke="#1D5BA3" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="51" cy="13" r="6.5" fill="#17C9C9"/></svg>
+          <div>
+            <span class="en">AI Visibility Report</span><span class="ar">تقرير الظهور في الذكاء الاصطناعي</span>
+            <small><span class="en">Dental clinic, Muscat. 180-point audit</span><span class="ar">عيادة أسنان، مسقط. تدقيق من 180 نقطة</span></small>
+          </div>
+        </div>
+        <div class="rtabs" role="tablist" aria-label="Report sections">
+          <button type="button" role="tab" id="t-score" aria-controls="p-score" aria-selected="true"><span class="en">Score</span><span class="ar">النتيجة</span></button>
+          <button type="button" role="tab" id="t-comp" aria-controls="p-comp" aria-selected="false" tabindex="-1"><span class="en">Competitor gap</span><span class="ar">الفجوة مع المنافسين</span></button>
+          <button type="button" role="tab" id="t-fix" aria-controls="p-fix" aria-selected="false" tabindex="-1"><span class="en">Fixes</span><span class="ar">الإصلاحات</span></button>
+        </div>
+      </div>
+
+      <div class="rpanel" id="p-score" role="tabpanel" aria-labelledby="t-score">
+        <div class="score-grid">
+          <div class="gauge" id="gauge">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="track" cx="60" cy="60" r="52" fill="none" stroke-width="11"/>
+              <circle class="val" id="gaugeVal" cx="60" cy="60" r="52" fill="none" stroke-width="11" stroke-dasharray="326.73" stroke-dashoffset="228.71"/>
+            </svg>
+            <div class="gauge-num">
+              <b id="gaugeNum">30</b>
+              <span><span class="en">AI Visibility Score, out of 100</span><span class="ar">نتيجة الظهور، من 100</span></span>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <b dir="ltr">0 / 66</b>
+              <p><span class="en">High-value queries that returned the clinic (implants, orthodontics, cosmetic)</span><span class="ar">استفسارات عالية القيمة ظهرت فيها العيادة (زراعة، تقويم، تجميل)</span></p>
+            </div>
+            <div class="metric">
+              <b><span class="cnt" data-to="4">4</span></b>
+              <p><span class="en">Different names for the same clinic across Google, its website and AI answers</span><span class="ar">أسماء مختلفة للعيادة نفسها بين جوجل وموقعها وإجابات الذكاء الاصطناعي</span></p>
+            </div>
+            <div class="metric wide">
+              <p style="margin:0 0 .2rem"><span class="en">Gemini, asked for a dental clinic in Qurum</span><span class="ar">Gemini، عند سؤاله عن عيادة أسنان في القرم</span></p>
+              <div class="langbars" id="langbars">
+                <div class="lb en-b"><span><span class="en">English</span><span class="ar">بالإنجليزية</span></span><span class="bar"><i></i><i></i><i></i></span><b><span class="cnt" data-to="3">3</span>/3</b></div>
+                <div class="lb ar-b"><span><span class="en">Arabic</span><span class="ar">بالعربية</span></span><span class="bar"><i></i><i></i><i></i></span><b>0/3</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rpanel" id="p-comp" role="tabpanel" aria-labelledby="t-comp" hidden>
+        <div class="comp">
+          <div>
+            <h3 style="margin-bottom:.6rem"><span class="en">Who AI recommends in your place</span><span class="ar">من يرشّحه الذكاء الاصطناعي بدلًا منك</span></h3>
+            <p style="color:var(--muted)">
+              <span class="en">Your report tests the same questions against nearby businesses in your sector, names who ChatGPT and Gemini recommend instead of you, and shows what their information has that yours doesn't.</span>
+              <span class="ar">يختبر تقريرك الأسئلة نفسها على الأنشطة القريبة منك في قطاعك، ويسمّي من يرشّحه ChatGPT وGemini بدلًا منك، ويوضّح ما تملكه معلوماتهم ولا تملكه معلوماتك.</span>
+            </p>
+            <p class="comp-legend" style="margin-top:1rem"><span class="en">Layout preview. Competitor names and counts appear in your own report.</span><span class="ar">معاينة للتصميم فقط. أسماء المنافسين وأرقامهم تظهر في تقريرك الخاص.</span></p>
+          </div>
+          <div class="comp-rows" aria-hidden="true">
+            <div class="comp-row"><span class="blur" style="--w:78%"></span><span class="dotset"><i></i><i></i><i></i></span><span>EN</span></div>
+            <div class="comp-row"><span class="blur" style="--w:62%"></span><span class="dotset"><i></i><i></i><i class="off"></i></span><span>EN</span></div>
+            <div class="comp-row"><span class="blur" style="--w:70%"></span><span class="dotset"><i></i><i class="off"></i><i class="off"></i></span><span>AR</span></div>
+            <div class="comp-row you"><strong><span class="en">You</span><span class="ar">نشاطك</span></strong><span class="dotset"><i class="off"></i><i class="off"></i><i class="off"></i></span><span>AR</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rpanel" id="p-fix" role="tabpanel" aria-labelledby="t-fix" hidden>
+        <div class="fixes">
+          <div class="fix"><div>
+            <h3><span class="en">Use one name everywhere</span><span class="ar">اسم واحد في كل مكان</span></h3>
+            <p><span class="en">Align the business name, phone and address across Google Business Profile, the website and social pages, so AI systems see one business, not four.</span><span class="ar">توحيد اسم النشاط ورقمه وعنوانه في ملف جوجل التجاري والموقع وصفحات التواصل، ليرى الذكاء الاصطناعي نشاطًا واحدًا لا أربعة.</span></p>
+            <span class="gapref"><span class="en">Fragmented identity</span><span class="ar">هوية مبعثرة</span></span>
+          </div></div>
+          <div class="fix"><div>
+            <h3><span class="en">Add structured data</span><span class="ar">إضافة البيانات المنظّمة</span></h3>
+            <p><span class="en">Mark up services, hours and location in a format ChatGPT and Gemini can read directly, instead of guessing from page text.</span><span class="ar">ترميز الخدمات وساعات العمل والموقع بصيغة يقرؤها ChatGPT وGemini مباشرة، بدل التخمين من نص الصفحة.</span></p>
+            <span class="gapref"><span class="en">Missing structured data</span><span class="ar">بيانات منظّمة ناقصة</span></span>
+          </div></div>
+          <div class="fix"><div>
+            <h3><span class="en">Match your Arabic to your English</span><span class="ar">مطابقة العربية مع الإنجليزية</span></h3>
+            <p><span class="en">Publish complete, consistent Arabic information, so an Arabic question has something accurate to draw on.</span><span class="ar">نشر معلومات عربية كاملة ومتطابقة، ليجد السؤال بالعربية مصدرًا دقيقًا يعتمد عليه.</span></p>
+            <span class="gapref"><span class="en">Bilingual gap</span><span class="ar">فجوة بين اللغتين</span></span>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="audit-note">
+      <span class="en">One audit, one clinic. The three gaps behind these numbers are not specific to dentistry: any business with a website, a Google listing and customers who ask in two languages can have them.</span>
+      <span class="ar">تدقيق واحد لعيادة واحدة. والفجوات الثلاث وراء هذه الأرقام ليست خاصة بطب الأسنان؛ فقد تظهر لدى أي نشاط لديه موقع وحساب على جوجل وعملاء يسألون بلغتين.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ 4. HOW IT WORKS / PRICING ============ -->
+<section class="sec" id="how-it-works" aria-labelledby="how-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="how-h">
+        <span class="en">Three steps. Each one is a separate decision.</span>
+        <span class="ar">ثلاث خطوات، وكل خطوة قرار مستقل.</span>
+      </h2>
+      <p class="lede">
+        <span class="en">Start with the audit. Move to the next step only if the report shows it's worth it.</span>
+        <span class="ar">ابدأ بالتدقيق، ولا تنتقل إلى الخطوة التالية إلا إذا أثبت التقرير أنها تستحق.</span>
+      </p>
+    </div>
+    <div class="ladder">
+      <article class="step step-1">
+        <div class="step-k"><i>1</i><span class="en">Audit</span><span class="ar">التدقيق</span></div>
+        <span class="fp-pill"><span class="en">Founding Partners: OMR 50</span><span class="ar">للشركاء المؤسسين: 50 ر.ع.</span></span>
+        <div class="price"><b>OMR 250</b><span><span class="en">Standard price</span><span class="ar">السعر العادي</span></span></div>
+        <p><span class="en">A 180-point check of how ChatGPT and Gemini see your business, in both languages, delivered as a written report: your AI Visibility Score, where you lose visibility, and what can be fixed.</span><span class="ar">فحص من 180 نقطة لطريقة رؤية ChatGPT وGemini لنشاطك باللغتين، يُسلَّم في تقرير مكتوب: نتيجة الظهور، وأين تخسر الظهور، وما الذي يمكن إصلاحه.</span></p>
+      </article>
+      <article class="step step-2">
+        <div class="step-k"><i>2</i><span class="en">Fix</span><span class="ar">الإصلاح</span></div>
+        <div class="price"><b>OMR 350</b><span><span class="en">Founding Partner rate. Standard OMR 450–650</span><span class="ar">سعر الشريك المؤسس. السعر العادي 450–650 ر.ع.</span></span></div>
+        <p><span class="en">We correct the structured data, bilingual gaps and identity mismatches your audit found, so ChatGPT and Gemini have accurate, consistent information to draw on.</span><span class="ar">نصحّح البيانات المنظّمة وفجوات اللغتين وتضارب الهوية التي كشفها التدقيق، ليجد ChatGPT وGemini معلومات دقيقة ومتطابقة يعتمدان عليها.</span></p>
+      </article>
+      <article class="step step-3">
+        <div class="step-k"><i>3</i><span class="en">AI Visibility Management</span><span class="ar">إدارة الظهور في الذكاء الاصطناعي</span></div>
+        <div class="price"><b><span class="en">OMR 150</span><span class="ar">150 ر.ع.</span><span style="font-size:.5em; font-weight:500; opacity:.8"><span class="en"> /month</span><span class="ar"> شهريًا</span></span></b><span><span class="en">Founding Partner rate. Standard OMR 250/month</span><span class="ar">سعر الشريك المؤسس. السعر العادي 250 ر.ع. شهريًا</span></span></div>
+        <p><span class="en">Each month we check how ChatGPT and Gemini describe your business, catch new gaps as these systems change, and keep your information current in Arabic and English.</span><span class="ar">كل شهر نراجع كيف يصف ChatGPT وGemini نشاطك، ونرصد أي فجوة جديدة مع تغيّر هذه الأنظمة، ونُبقي معلوماتك محدّثة بالعربية والإنجليزية.</span></p>
+      </article>
+    </div>
+    <p class="ladder-note">
+      <span class="en">Founding Partners pay a founding diagnostic fee of OMR 50 for the audit, fully credited toward the Fix, and keep the founding rates on Steps 2 and 3 after the pilot ends.</span>
+      <span class="ar">يدفع الشركاء المؤسسون رسوم تشخيص تأسيسية قدرها 50 ر.ع. للتدقيق، تُحتسب بالكامل من قيمة الإصلاح، ويحتفظون بأسعار الشراكة التأسيسية على الخطوتين 2 و3 بعد انتهاء المرحلة التجريبية.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ 5. WHO IT'S FOR ============ -->
+<section class="sec" id="who-its-for" aria-labelledby="who-h" style="padding-top:0">
+  <div class="wrap sectors-grid">
+    <div>
+      <h2 id="who-h" style="margin-bottom:1.2rem">
+        <span class="en">For any Omani business with a website and customers</span>
+        <span class="ar">لكل نشاط عُماني لديه موقع وعملاء</span>
+      </h2>
+      <p class="lede" style="margin-bottom:1.8rem">
+        <span class="en">If people compare you, search for you, or ask AI to recommend someone like you, this applies. Pick your sector to see the kind of question your customers are asking.</span>
+        <span class="ar">إن كان الناس يقارنونك أو يبحثون عنك أو يطلبون من الذكاء الاصطناعي ترشيح نشاط مثلك، فهذا يعنيك. اختر قطاعك لترى نوع السؤال الذي يطرحه عملاؤك.</span>
+      </p>
+      <div class="chips" id="chips" role="group" aria-label="Sectors">
+        <button class="chip" type="button" data-s="0" aria-pressed="true"><span class="en">Healthcare &amp; clinics</span><span class="ar">الرعاية الصحية والعيادات</span><span class="pilot"><span class="en">Pilot</span><span class="ar">تجريبي</span></span></button>
+        <button class="chip" type="button" data-s="1" aria-pressed="false"><span class="en">Law &amp; professional services</span><span class="ar">المحاماة والخدمات المهنية</span></button>
+        <button class="chip" type="button" data-s="2" aria-pressed="false"><span class="en">Car rental</span><span class="ar">تأجير السيارات</span></button>
+        <button class="chip" type="button" data-s="3" aria-pressed="false"><span class="en">Hospitality &amp; restaurants</span><span class="ar">الضيافة والمطاعم</span></button>
+        <button class="chip" type="button" data-s="4" aria-pressed="false"><span class="en">Retail</span><span class="ar">التجزئة</span></button>
+        <button class="chip" type="button" data-s="5" aria-pressed="false"><span class="en">Logistics</span><span class="ar">الخدمات اللوجستية</span></button>
+        <button class="chip" type="button" data-s="6" aria-pressed="false"><span class="en">Real estate</span><span class="ar">العقارات</span></button>
+      </div>
+      <p class="pilot-note">
+        <span class="en">Current pilot: dental and aesthetic clinics in Muscat. It's the first sector, not the only one.</span>
+        <span class="ar">التجربة الحالية لعيادات الأسنان والتجميل في مسقط. هذا هو القطاع الأول، وليس الوحيد.</span>
+      </p>
+    </div>
+    <div class="try">
+      <div class="try-label"><span class="en">A customer asks ChatGPT:</span><span class="ar">عميل يسأل ChatGPT:</span></div>
+      <span class="sr" aria-live="polite" id="tryLive"></span>
+      <div class="try-q" id="tryQ"></div>
+      <div class="try-q-alt" id="tryAlt"></div>
+      <div class="try-note" id="tryNote" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="m16.5 10 5-3v10l-5-3"/></svg><span id="tryNoteT"></span></div>
+      <div class="try-foot"><span class="en">Does the answer name your business, in both languages? The audit tells you.</span><span class="ar">هل تذكر الإجابة نشاطك، باللغتين؟ التدقيق يجيبك.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. PROCESS ============ -->
+<section class="sec process" id="process" aria-labelledby="proc-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="proc-h">
+        <span class="en">What happens during the 180-point audit</span>
+        <span class="ar">ماذا يحدث خلال تدقيق الـ180 نقطة</span>
+      </h2>
+      <p class="lede"><span class="en">5 to 7 business days. No dashboards, no jargon. You don't need to prepare anything.</span><span class="ar">من 5 إلى 7 أيام عمل. بلا لوحات تحكم ولا مصطلحات معقّدة، ولا تحتاج إلى تجهيز أي شيء.</span></p>
+    </div>
+    <ol class="proc">
+      <li data-n="1">
+        <h3><span class="en">We ask AI about you</span><span class="ar">نسأل الذكاء الاصطناعي عنك</span></h3>
+        <p><span class="en">We ask ChatGPT and Gemini about your business and your sector the way a real customer would, in English and in Arabic.</span><span class="ar">نسأل ChatGPT وGemini عن نشاطك وقطاعك كما يسأل العميل الحقيقي، بالعربية والإنجليزية.</span></p>
+      </li>
+      <li data-n="2">
+        <h3><span class="en">We check your information</span><span class="ar">نراجع معلوماتك</span></h3>
+        <p><span class="en">Your website, Google Business Profile and social pages, checked for anything missing, outdated or inconsistent between languages.</span><span class="ar">موقعك وملفك التجاري على جوجل وصفحات التواصل، نراجعها بحثًا عن أي نقص أو معلومة قديمة أو اختلاف بين اللغتين.</span></p>
+      </li>
+      <li data-n="3">
+        <h3><span class="en">We compare you with nearby competitors</span><span class="ar">نقارنك بالمنافسين القريبين</span></h3>
+        <p><span class="en">So you see where you stand relative to whoever is currently getting the recommendation.</span><span class="ar">لترى موقعك مقارنةً بمن يحصل على التوصية حاليًا.</span></p>
+      </li>
+      <li data-n="4">
+        <h3><span class="en">You get the report</span><span class="ar">تستلم التقرير</span></h3>
+        <p><span class="en">A score, a list of gaps and a prioritised list of fixes, in plain language. We walk you through it.</span><span class="ar">نتيجة، وقائمة بالفجوات، وقائمة إصلاحات مرتّبة حسب الأولوية، بلغة واضحة. ونشرحه لك خطوة بخطوة.</span></p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ SERVICES (after the audit) ============ -->
+<section class="sec" id="services" aria-labelledby="svc-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="svc-h">
+        <span class="en">Beyond visibility: what we build next</span>
+        <span class="ar">ما بعد الظهور: ما نبنيه لك بعد ذلك</span>
+      </h2>
+      <p class="lede">
+        <span class="en">Once ChatGPT and Gemini have accurate information about you, these are the tools we can set up next. Each one is optional, and we only suggest what your audit supports.</span>
+        <span class="ar">بعد أن تصبح معلوماتك لدى ChatGPT وGemini دقيقة، يمكننا أن نجهّز لك الأدوات التالية. كلها اختيارية، ولا نقترح منها إلا ما يدعمه تقرير التدقيق.</span>
+      </p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc">
+        <div class="svc-top"><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12Z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg></span><span class="svc-tag"><span class="en">Available after your audit</span><span class="ar">متاح بعد التدقيق</span></span></div>
+        <h3><span class="en">WhatsApp Front Desk Agent</span><span class="ar">وكيل الاستقبال على واتساب</span></h3>
+        <p><span class="en">Answers your customers on WhatsApp 24/7, in Arabic and English. It books the appointment or qualifies the enquiry, and hands any complaint straight to your team.</span><span class="ar">يردّ على عملائك في واتساب على مدار الساعة، بالعربية والإنجليزية. يحجز الموعد أو يتأكّد من جدّية الاستفسار، ويحوّل أي شكوى مباشرةً إلى فريقك.</span></p>
+      </article>
+      <article class="svc">
+        <div class="svc-top"><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9.5 15 2 2 3.5-3.5"/></svg></span><span class="svc-tag"><span class="en">Available after your audit</span><span class="ar">متاح بعد التدقيق</span></span></div>
+        <h3><span class="en">Follow-up &amp; Recall</span><span class="ar">المتابعة والتذكير</span></h3>
+        <p><span class="en">Follows up with patients and leads who went quiet, on a schedule you set, using only the details you give us. Nothing is guessed.</span><span class="ar">يتواصل من جديد مع المرضى والعملاء المحتملين الذين انقطع تواصلهم، في مواعيد تحدّدها أنت، وبالمعلومات التي تزوّدنا بها فقط. لا شيء بالتخمين.</span></p>
+      </article>
+      <article class="svc">
+        <div class="svc-top"><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="3"/><path d="m10.5 9 4.5 3-4.5 3Z"/></svg></span><span class="svc-tag"><span class="en">Available after your audit</span><span class="ar">متاح بعد التدقيق</span></span></div>
+        <h3><span class="en">AI Video Ads &amp; Reels</span><span class="ar">إعلانات فيديو وريلز بالذكاء الاصطناعي</span></h3>
+        <p><span class="en">Scroll-stopping ads and reels made from the photos and renders you already have, with captions in Arabic and English.</span><span class="ar">إعلانات وريلز تلفت الانتباه من أول ثانية، نصنعها من صورك والتصاميم ثلاثية الأبعاد المتوفرة لديك، مع نصوص على الفيديو بالعربية والإنجليزية.</span></p>
+      </article>
+      <article class="svc">
+        <div class="svc-top"><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8Z"/></svg></span><span class="svc-tag"><span class="en">Available after your audit</span><span class="ar">متاح بعد التدقيق</span></span></div>
+        <h3><span class="en">Reviews &amp; Reputation</span><span class="ar">التقييمات والسمعة</span></h3>
+        <p><span class="en">A simple way to ask every customer for a Google review, and calm replies to negative ones that you approve before they go out. Reviews also feed into your AI Visibility Score.</span><span class="ar">طريقة سهلة لطلب تقييم على جوجل من كل عميل، وردود هادئة على التقييمات السلبية لا تُنشر إلا بعد موافقتك. والتقييمات من العوامل التي تدخل في نتيجة ظهورك في الذكاء الاصطناعي.</span></p>
+      </article>
+    </div>
+    <div class="svc-foot">
+      <p><span class="en">Priced per business after your audit. Ask us on WhatsApp.</span><span class="ar">يُحدَّد السعر لكل نشاط بعد التدقيق. اسألنا على واتساب.</span></p>
+      <a class="btn btn-blue wa-link" href="https://wa.me/96894440005"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .3-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.1.1.3 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .8-.2 1.4Z"/></svg><span class="en">Ask us on WhatsApp</span><span class="ar">اسألنا على واتساب</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. FOUNDING PARTNER ============ -->
+<section class="sec fp" id="founding-partner" aria-labelledby="fp-h">
+  <div class="wrap fp-grid">
+    <div>
+      <h2 id="fp-h">
+        <span class="en">The Founding Partner Program</span>
+        <span class="ar">برنامج الشركاء المؤسسين</span>
+      </h2>
+      <p class="lede" style="margin-top:1.2rem">
+        <span class="en">Five spots for our Muscat pilot. Dental and aesthetic clinics first, then other sectors as the pilot proves itself.</span>
+        <span class="ar">خمسة مقاعد لتجربتنا في مسقط. نبدأ بعيادات الأسنان والتجميل، ثم نتوسّع إلى قطاعات أخرى حين تثبت المرحلة التجريبية جدواها.</span>
+      </p>
+      <div class="seats" aria-hidden="true"><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span></div>
+      <p class="seats-cap"><span class="en"><span class="n">5 of 5</span> spots open</span><span class="ar"><span class="n">5 من 5</span> مقاعد متاحة</span></p>
+      <div class="hero-ctas">
+        <a class="btn btn-amber wa-link" href="https://wa.me/96894440005"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .3-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.1.1.3 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .8-.2 1.4Z"/></svg><span class="en">Claim a Founding Partner Spot</span><span class="ar">احجز مقعدك كشريك مؤسس</span></a>
+      </div>
+    </div>
+    <div>
+      <ul class="incl">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span><span class="en">The full 180-point AI Visibility Audit (OMR 250 standard)</span><span class="ar">تدقيق الظهور الكامل من 180 نقطة (السعر العادي 250 ر.ع.)</span></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span><span class="en">Your written report: AI Visibility Score, high-value query visibility, competitor gap and identity consistency</span><span class="ar">تقريرك المكتوب: نتيجة الظهور، والظهور في الاستفسارات عالية القيمة، والفجوة مع المنافسين، واتساق هويتك</span></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span><span class="en">Founding rates kept after the pilot: OMR 350 Fix, OMR 150/month AI Visibility Management</span><span class="ar">أسعار تأسيسية تبقى بعد المرحلة التجريبية: 350 ر.ع. للإصلاح، و150 ر.ع. شهريًا لإدارة الظهور</span></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span><span class="en">Direct access to the person running your audit, not a ticket queue</span><span class="ar">تواصل مباشر مع الشخص الذي يُجري تدقيقك، دون المرور بقسم دعم أو انتظار دور</span></span></li>
+      </ul>
+      <p class="fee">
+        <span class="en"><b>Founding diagnostic fee: OMR 50,</b> fully credited toward the Fix if you continue. It keeps the five spots for businesses that intend to act on what the audit finds.</span>
+        <span class="ar"><b>رسوم التشخيص التأسيسية: 50 ر.ع.</b> تُحتسب بالكامل من قيمة الإصلاح إذا واصلت معنا. وهي تحفظ المقاعد الخمسة للأنشطة الجادّة في العمل بنتائج التدقيق.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. FAQ ============ -->
+<section class="sec" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="faq-h"><span class="en">Questions we get asked</span><span class="ar">أسئلة تصلنا كثيرًا</span></h2>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">Nobody in Oman uses ChatGPT to find a business. Why does this matter?</span><span class="ar">لا أحد في عُمان يستخدم ChatGPT للبحث عن نشاط تجاري. لماذا يهمّني هذا؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">Some of your customers already do. The question isn't whether all of them do today. It's whether your information is ready before most of them start.</span><span class="ar">بعض عملائك يستخدمونه بالفعل. والسؤال ليس هل يستخدمه الجميع اليوم، بل هل ستكون معلوماتك جاهزة قبل أن يبدأ أغلبهم.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">We already do SEO. Isn't this the same thing?</span><span class="ar">نحن نعمل على تحسين محركات البحث (SEO) أصلًا. أليس هذا الشيء نفسه؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">No. SEO helps you rank in Google's list of links. AI visibility is about whether ChatGPT and Gemini name your business directly when someone asks for a recommendation. That depends on different data: structured information, consistency across platforms, and parity between Arabic and English.</span><span class="ar">لا. تحسين محركات البحث يرفع ترتيبك في قائمة روابط جوجل. أما الظهور في الذكاء الاصطناعي فيتعلّق بما إذا كان ChatGPT وGemini يذكران نشاطك مباشرة حين يطلب أحدهم توصية، وهذا يعتمد على بيانات مختلفة: المعلومات المنظّمة، والاتساق بين المنصّات، والتطابق بين العربية والإنجليزية.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">Why pay for an audit when free tools exist?</span><span class="ar">لماذا أدفع مقابل تدقيق وهناك أدوات مجانية؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">Free tools check your website. Our audit asks ChatGPT and Gemini the questions your customers ask, in both languages, compares you with nearby businesses, and gives you a prioritised fix list. Founding Partners pay a founding diagnostic fee of OMR 50, fully credited toward the Fix.</span><span class="ar">الأدوات المجانية تفحص موقعك. أما تدقيقنا فيطرح على ChatGPT وGemini أسئلة عملائك باللغتين، ويقارنك بالأنشطة القريبة، ويسلّمك قائمة إصلاحات مرتّبة حسب الأولوية. ويدفع الشركاء المؤسسون رسوم تشخيص تأسيسية قدرها 50 ر.ع.، تُحتسب بالكامل من قيمة الإصلاح.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">Can you guarantee we'll appear in ChatGPT or Gemini?</span><span class="ar">هل تضمنون ظهورنا في ChatGPT أو Gemini؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">No. Nobody controls what ChatGPT or Gemini say. We make sure the information they read about your business is complete, accurate and consistent in both languages. That's the part you can control.</span><span class="ar">لا. لا أحد يتحكّم فيما يقوله ChatGPT أو Gemini. ما نفعله هو أن نحرص على أن تكون المعلومات التي يقرآنها عن نشاطك كاملة ودقيقة ومتطابقة باللغتين، وهذا هو الجزء الذي يمكنك التحكّم فيه.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">We're not a clinic. Does this apply to us?</span><span class="ar">لسنا عيادة. هل ينطبق هذا علينا؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">Yes. Dental and aesthetic clinics in Muscat are our current pilot. The gaps we check apply to any business with a website and customers: law firms, car rentals, logistics, real estate, restaurants and retail.</span><span class="ar">نعم. عيادات الأسنان والتجميل في مسقط هي تجربتنا الحالية، لكن الفجوات التي نفحصها تنطبق على أي نشاط لديه موقع وعملاء: مكاتب المحاماة، وتأجير السيارات، والخدمات اللوجستية، والعقارات، والمطاعم، والتجزئة.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">Am I locked into the next steps after the audit?</span><span class="ar">هل أصبح ملتزمًا بالخطوات التالية بعد التدقيق؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">No. Each step is a separate decision. You can stop after the audit with your report in hand.</span><span class="ar">لا. كل خطوة قرار مستقل، ويمكنك التوقّف بعد التدقيق والتقرير بين يديك.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">Do you only do audits?</span><span class="ar">هل تقدّمون التدقيق فقط؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">The audit is where we start. After it, we can also set up a WhatsApp agent, follow-up messages, video ads and review collection, only if the report shows they're worth it.</span><span class="ar">التدقيق هو نقطة البداية. وبعده يمكننا أيضًا تجهيز وكيل واتساب، ورسائل المتابعة، وإعلانات الفيديو، وجمع التقييمات، وذلك فقط إذا أظهر التقرير أنها تستحق.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">How long does the audit take?</span><span class="ar">كم يستغرق التدقيق؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">5 to 7 business days from when we start.</span><span class="ar">من 5 إلى 7 أيام عمل من تاريخ البدء.</span></p></div></div></div>
+      <div class="qa"><h3 style="margin:0"><button type="button" aria-expanded="false"><span><span class="en">Our website is only in Arabic, or only in English. Is that a problem?</span><span class="ar">موقعنا بالعربية فقط، أو بالإنجليزية فقط. هل هذه مشكلة؟</span></span><i class="pm" aria-hidden="true"></i></button></h3>
+        <div class="ans"><div><p><span class="en">It's one of the most common gaps. In our first audit, Gemini recommended the business in 3 of 3 English tests and 0 of 3 identical Arabic tests.</span><span class="ar">هذه من أكثر الفجوات شيوعًا. في أول تدقيق أجريناه، رشّح Gemini النشاط في 3 من 3 اختبارات بالإنجليزية، و0 من 3 اختبارات مطابقة بالعربية.</span></p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. FINAL CTA ============ -->
+<section class="sec final" id="contact" aria-labelledby="final-h">
+  <div class="wrap">
+    <h2 id="final-h">
+      <span class="en">Want to see how AI sees your business today?</span>
+      <span class="ar">تريد أن تعرف كيف يرى الذكاء الاصطناعي نشاطك اليوم؟</span>
+    </h2>
+    <p class="lede">
+      <span class="en">Send us your business name. We'll reply with how the Founding Partner audit would work for your business.</span>
+      <span class="ar">أرسل لنا اسم نشاطك، وسنردّ عليك بتفاصيل تدقيق الشركاء المؤسسين كما ينطبق على نشاطك.</span>
+    </p>
+    <div class="final-ctas">
+      <a class="btn btn-amber wa-link" href="https://wa.me/96894440005"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .3-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.1.1.3 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .8-.2 1.4Z"/></svg><span class="en">Message us on WhatsApp</span><span class="ar">راسلنا على واتساب</span></a>
+      <a class="btn btn-ghost" href="https://ig.me/m/catalyst.oman"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span class="en">DM us on Instagram</span><span class="ar">راسلنا على إنستغرام</span></a>
+    </div>
+    <p class="contact-alt"><span class="en">Prefer email? </span><span class="ar">تفضّل البريد الإلكتروني؟ </span><a href="mailto:catalystoman@proton.me">catalystoman@proton.me</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="#fff" stroke-width="4"/><path d="M20 32h22M34 23l9 9-9 9" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="51" cy="13" r="6.5" fill="#17C9C9"/></svg>
+      <span class="en">Catalyst Oman</span><span class="ar">كاتاليست عُمان</span>
+    </a>
+    <div class="foot-links">
+      <a href="https://wa.me/96894440005"><span class="en">WhatsApp</span><span class="ar">واتساب</span></a>
+      <a href="https://www.instagram.com/catalyst.oman">Instagram</a>
+      <a href="mailto:catalystoman@proton.me"><span class="en">Email</span><span class="ar">البريد</span></a>
+    </div>
+    <span><span class="en">© 2026 Catalyst Oman, Muscat</span><span class="ar">© 2026 كاتاليست عُمان، مسقط</span></span>
+  </div>
+</footer>
+
+<div class="mcta" id="mcta">
+  <a class="btn btn-amber wa-link" href="https://wa.me/96894440005"><span class="en">Claim a Founding Partner Spot</span><span class="ar">احجز مقعدك كشريك مؤسس</span></a>
+</div>
+
 <script>
 (function(){
-  var html = document.documentElement;
-  var toggle = document.getElementById('langToggle');
-  var saved = localStorage.getItem('catalystoman-lang');
+  var root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function setLang(lang){
-    if(lang === 'ar'){
-      html.setAttribute('lang','ar');
-      html.setAttribute('dir','rtl');
-      html.setAttribute('data-lang','ar');
-    } else {
-      html.setAttribute('lang','en');
-      html.setAttribute('dir','ltr');
-      html.setAttribute('data-lang','en');
+  /* ---------- Language ---------- */
+  var WA = 'https://wa.me/96894440005?text=';
+  var waText = {
+    en: "Hello Catalyst Oman, I'd like to claim a Founding Partner spot. My business is: ",
+    ar: "السلام عليكم فريق كاتاليست عُمان، أرغب في حجز مقعد كشريك مؤسس. اسم نشاطي: "
+  };
+  function setLang(l, save){
+    root.lang = l; root.dir = (l === 'ar') ? 'rtl' : 'ltr';
+    document.title = l === 'ar' ? 'كاتاليست عُمان — الظهور في الذكاء الاصطناعي للأنشطة العُمانية' : 'Catalyst Oman — AI Visibility for Omani Businesses';
+    document.querySelectorAll('.wa-link').forEach(function(a){ a.href = WA + encodeURIComponent(waText[l]); });
+    document.getElementById('langBtn').setAttribute('aria-label', l === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
+    if (save) { try { localStorage.setItem('co-lang', l); } catch(e){} }
+    renderSector(currentSector, true);
+    relabel();
+  }
+  var initial = 'en';
+  try {
+    var qp = new URLSearchParams(location.search).get('lang');
+    var saved = localStorage.getItem('co-lang');
+    if (qp === 'ar' || qp === 'en') initial = qp;
+    else if (saved) initial = saved;
+    else if ((navigator.language || '').toLowerCase().indexOf('ar') === 0) initial = 'ar';
+  } catch(e){}
+  document.getElementById('langBtn').addEventListener('click', function(){ setLang(root.lang === 'ar' ? 'en' : 'ar', true); });
+
+  /* ---------- Header + sticky CTA ---------- */
+  var head = document.querySelector('.site-head'), mcta = document.getElementById('mcta');
+  var fpSec = document.getElementById('founding-partner'), finalSec = document.getElementById('contact');
+  function onScroll(){
+    var y = window.scrollY;
+    head.classList.toggle('solid', y > 20);
+    var vh = window.innerHeight;
+    var inFp = fpSec.getBoundingClientRect(), inFin = finalSec.getBoundingClientRect();
+    var hide = (inFp.top < vh && inFp.bottom > 0) || (inFin.top < vh && inFin.bottom > 0);
+    mcta.classList.toggle('show', y > vh * .8 && !hide);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* ---------- Hero: live AI answer (plays EN then AR once; tabs replay) ---------- */
+  var body = document.getElementById('askBody'), qEl = document.getElementById('askQ'), aEl = document.getElementById('askA');
+  var tabs = document.querySelectorAll('.ask-tabs button');
+  var ALERT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></svg>';
+  var demo = {
+    en: { q: 'Dental clinic in Qurum?', intro: 'Here are three dental clinics in Qurum you could consider:',
+          rows: [{ blur: '64%' }, { name: 'Your clinic', you: true, tag: 'named' }, { blur: '52%' }],
+          mark: { cls: 'good', v: '3/3', lab: 'enT' } },
+    ar: { q: 'عيادة أسنان في القرم؟', intro: 'إليك ثلاث عيادات أسنان في القرم يمكنك النظر فيها:',
+          rows: [{ name: 'عيادة منافسة (أ)', rival: true }, { blur: '70%' }, { blur: '48%' }],
+          miss: 'عيادتك لم تُذكر في الإجابة',
+          mark: { cls: 'bad', v: '0/3', lab: 'arT' } }
+  };
+  /* Catalyst's own labels follow the page language, not the demo language */
+  var LAB = { named: { en: 'Named', ar: 'مذكورة' }, enT: { en: 'English tests', ar: 'اختبارات بالإنجليزية' }, arT: { en: 'Arabic tests', ar: 'اختبارات بالعربية' } };
+  function lab(n){
+    var k = root.lang === 'ar' ? 'ar' : 'en', d = k === 'ar' ? 'rtl' : 'ltr';
+    n.textContent = LAB[n.dataset.lab][k]; n.lang = k;
+    if (n.parentNode && n.parentNode.classList.contains('mark')) n.parentNode.dir = d;
+  }
+  function relabel(){ if (aEl) aEl.querySelectorAll('[data-lab]').forEach(lab); }
+  var timers = [];
+  function clear(){ timers.forEach(clearTimeout); timers = []; }
+  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
+  function el(tag, cls, html){ var d = document.createElement(tag); if (cls) d.className = cls; if (html != null) d.innerHTML = html; return d; }
+  function words(parent, text){
+    return text.split(' ').map(function(w, k){
+      if (k) parent.appendChild(document.createTextNode(' '));
+      var s = el('span', 'w'); s.textContent = w; parent.appendChild(s); return s;
+    });
+  }
+  function build(l){
+    var d = demo[l], p = { iw: [], rows: [], miss: null, mark: null };
+    var intro = el('p', 'a-intro'); p.iw = words(intro, d.intro); aEl.appendChild(intro);
+    d.rows.forEach(function(r, k){
+      var row = el('div', 'rec' + (r.you ? ' you' : '') + (r.rival ? ' rival' : ''));
+      row.appendChild(el('span', 'n', String(k + 1)));
+      if (r.blur) { var b = el('span', 'blur'); b.style.setProperty('--w', r.blur); row.appendChild(b); row._w = []; }
+      else {
+        var st = el('strong'); row._w = words(st, r.name); row.appendChild(st);
+        if (r.tag) { var t = el('span', 'tag'); t.dataset.lab = r.tag; lab(t); row.appendChild(t); }
+      }
+      aEl.appendChild(row); p.rows.push(row);
+    });
+    if (d.miss) { p.miss = el('div', 'missing', ALERT + '<span></span>'); p.miss.lastChild.textContent = d.miss; aEl.appendChild(p.miss); }
+    p.mark = el('div', 'mark ' + d.mark.cls, '<b></b><span></span>');
+    p.mark.firstChild.textContent = d.mark.v; aEl.appendChild(p.mark); p.mark.lastChild.dataset.lab = d.mark.lab; lab(p.mark.lastChild);
+    return p;
+  }
+  function inAll(list){ list.forEach(function(x){ x.classList.add('in'); }); }
+  function run(l, next){
+    clear();
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.l === l ? 'true' : 'false'); });
+    body.dir = l === 'ar' ? 'rtl' : 'ltr'; body.lang = l;
+    aEl.innerHTML = ''; qEl.textContent = '';
+    var d = demo[l];
+    if (reduce) {
+      qEl.textContent = d.q; var f = build(l);
+      inAll(f.iw); f.rows.forEach(function(r){ r.classList.add('in'); inAll(r._w); if (r.classList.contains('you')) r.classList.add('hl'); });
+      if (f.miss) f.miss.classList.add('in'); f.mark.classList.add('in');
+      return;
     }
-    localStorage.setItem('catalystoman-lang', lang);
+    var caret = el('span', 'caret'), txt = document.createTextNode('');
+    qEl.appendChild(txt); qEl.appendChild(caret);
+    var i = 0, typeMs = l === 'ar' ? 58 : 44;
+    (function type(){
+      if (i <= d.q.length) { txt.nodeValue = d.q.slice(0, i++); later(type, typeMs); return; }
+      caret.remove();
+      var think = el('div', 'thinking', '<i></i><i></i><i></i>'); aEl.appendChild(think);
+      later(function(){ think.classList.add('on'); }, 30);
+      later(function(){
+        think.remove();
+        var p = build(l), t = 0, W = 80;
+        p.iw.forEach(function(w){ later(function(){ w.classList.add('in'); }, t); t += W; });
+        t += 160;
+        p.rows.forEach(function(r){
+          later(function(){ r.classList.add('in'); }, t); t += 280;
+          r._w.forEach(function(w){ later(function(){ w.classList.add('in'); }, t); t += W + 50; });
+          if (r.classList.contains('you')) { later(function(){ r.classList.add('hl'); }, t + 60); t += 520; }
+          t += 100;
+        });
+        if (p.miss) { later(function(){ p.miss.classList.add('in'); }, t); t += 480; }
+        later(function(){ p.mark.classList.add('in'); }, t); t += 400;
+        if (next) later(next, t + 1800);
+      }, 850);
+    })();
   }
-
-  if(saved === 'ar' || saved === 'en'){
-    setLang(saved);
-  }
-
-  toggle.addEventListener('click', function(){
-    var current = html.getAttribute('data-lang');
-    setLang(current === 'en' ? 'ar' : 'en');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ run(t.dataset.l); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var o = t.dataset.l === 'en' ? 1 : 0; tabs[o].focus(); tabs[o].click(); }
+    });
   });
+
+  /* ---------- Report tabs ---------- */
+  var rtabs = Array.prototype.slice.call(document.querySelectorAll('.rtabs button'));
+  function selectR(btn){
+    rtabs.forEach(function(b){
+      var on = b === btn; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
+      document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  rtabs.forEach(function(b, idx){
+    b.addEventListener('click', function(){ selectR(b); });
+    b.addEventListener('keydown', function(e){
+      var dir = root.dir === 'rtl' ? -1 : 1, n = null;
+      if (e.key === 'ArrowRight') n = idx + dir; if (e.key === 'ArrowLeft') n = idx - dir;
+      if (n !== null){ n = (n + rtabs.length) % rtabs.length; rtabs[n].focus(); selectR(rtabs[n]); }
+    });
+  });
+
+  /* ---------- Scroll motion helpers ---------- */
+  var hasIO = 'IntersectionObserver' in window;
+  function onView(node, fn, th){
+    if (!node) return;
+    if (!hasIO) { fn(); return; }
+    var o = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { o.disconnect(); fn(); } }); }, { threshold: th || .4 });
+    o.observe(node);
+  }
+  function count(node, to, ms){
+    if (reduce) { node.textContent = to; return; }
+    var t0 = null;
+    requestAnimationFrame(function tick(ts){
+      if (!t0) t0 = ts; var p = Math.min((ts - t0) / ms, 1), e = 1 - Math.pow(1 - p, 3);
+      node.textContent = Math.round(to * e); if (p < 1) requestAnimationFrame(tick);
+    });
+  }
+
+  /* 2. Ten links collapse into one answer */
+  var shiftVis = document.getElementById('shiftVis');
+  onView(shiftVis, function(){ shiftVis.classList.add('go'); }, .5);
+
+  /* 3. "— not found" typed over with real values, each flashing green */
+  var codeBox = document.getElementById('codeBox'), slots = codeBox.querySelectorAll('.slot');
+  function fillSlot(s, instant){
+    var val = s.getAttribute('data-val'); s.innerHTML = ''; var v = el('span', 'v'); s.appendChild(v);
+    if (instant) { v.textContent = val; s.classList.add('ok', 'done'); return; }
+    s.classList.remove('out');
+    var j = 0; (function ty(){ if (j <= val.length) { v.textContent = val.slice(0, j++); setTimeout(ty, 26); } else s.classList.add('ok'); })();
+  }
+  onView(codeBox, function(){
+    if (reduce) return;
+    slots.forEach(function(s, k){
+      var t0 = 800 + k * 850;
+      setTimeout(function(){ s.classList.add('out'); }, t0);
+      setTimeout(function(){ fillSlot(s, false); }, t0 + 170);
+    });
+    setTimeout(function(){ codeBox.classList.add('fixed'); }, 800 + slots.length * 850);
+  }, .55);
+
+  /* 4. Four name tags slide into one verified name */
+  var namesBox = document.getElementById('namesBox'), namesFix = document.getElementById('namesFix');
+  function mergeNames(){
+    var c = namesFix.getBoundingClientRect(), cx = c.left + c.width / 2, cy = c.top + c.height / 2;
+    namesFix.querySelectorAll('.nt').forEach(function(t){
+      var r = t.getBoundingClientRect();
+      t.style.setProperty('--tx', Math.round(cx - (r.left + r.width / 2)) + 'px');
+      t.style.setProperty('--ty', Math.round(cy - (r.top + r.height / 2)) + 'px');
+    });
+    namesFix.classList.add('go');
+    setTimeout(function(){ namesFix.classList.add('done'); namesBox.classList.add('fixed'); }, reduce ? 0 : 460);
+  }
+  onView(namesFix, function(){ if (!reduce) setTimeout(mergeNames, 900); }, .6);
+
+  /* 5. Report: gauge, bars (3/3 vs 0/3) and counters */
+  var gauge = document.getElementById('gauge'), gNum = document.getElementById('gaugeNum'), SCORE = 30;
+  var cnts = document.querySelectorAll('.cnt');
+  if (!reduce && hasIO) { gNum.textContent = '0'; cnts.forEach(function(c){ c.textContent = '0'; }); }
+  onView(gauge, function(){
+    gauge.classList.add('in'); count(gNum, SCORE, 600);
+    cnts.forEach(function(c){ count(c, +c.dataset.to, 600); });
+    document.querySelectorAll('.lb.en-b .bar i').forEach(function(b, k){ setTimeout(function(){ b.classList.add('on'); }, reduce ? 0 : 120 + k * 140); });
+  }, .35);
+
+  /* Micro: section headings fade up 12px, staggered 80ms */
+  if (!reduce && hasIO) {
+    var rvIO = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { e.target._rv.forEach(function(x){ x.classList.add('in'); }); rvIO.unobserve(e.target); } });
+    }, { threshold: .15, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('main section:not(.hero) h2').forEach(function(h){
+      var list = [h], par = h.parentNode;
+      if (par.classList.contains('sec-head')) list = Array.prototype.slice.call(par.children);
+      else { var n = h.nextElementSibling; while (n && n.tagName === 'P' && list.length < 3) { list.push(n); n = n.nextElementSibling; } }
+      list.forEach(function(x, k){ x.classList.add('rv'); x.style.setProperty('--d', (k * 80) + 'ms'); });
+      h._rv = list; rvIO.observe(h);
+    });
+  }
+
+  /* ---------- Sector questions ---------- */
+  var sectors = [
+    { en:'Which dental clinic in Qurum would you recommend for implants?', ar:'أي عيادة أسنان في القرم تنصحني بها لزراعة الأسنان؟' },
+    { en:'Can you recommend a commercial lawyer in Muscat?', ar:'هل تنصحني بمحامٍ تجاري في مسقط؟' },
+    { en:'Where can I rent a car monthly near Seeb?', ar:'أين أستأجر سيارة بعقد شهري قرب السيب؟' },
+    { en:'Good family restaurant in Al Mouj for Friday lunch?', ar:'ما مطعم عائلي مناسب في الموج لغداء الجمعة؟' },
+    { en:'Where can I buy office furniture in Muscat?', ar:'من أين أشتري أثاثًا مكتبيًا في مسقط؟' },
+    { en:'Which courier does same-day delivery in Muscat?', ar:'أي شركة توصيل تقدّم خدمة التوصيل في اليوم نفسه داخل مسقط؟' },
+    { en:'Which developer in Muscat has freehold flats with a payment plan?', ar:'أي مطوّر في مسقط لديه شقق تملك حر بخطة دفع؟',
+      note:{ en:'For developers and agents we also produce AI video ads for each project.', ar:'وللمطوّرين والمكاتب العقارية، ننتج أيضًا إعلانات فيديو بالذكاء الاصطناعي لكل مشروع.' } }
+  ];
+  var currentSector = 0, sTimers = [];
+  var tryQ = document.getElementById('tryQ'), tryAlt = document.getElementById('tryAlt');
+  var tryLive = document.getElementById('tryLive'), tryNote = document.getElementById('tryNote'), tryNoteT = document.getElementById('tryNoteT');
+  function renderSector(i, instant){
+    currentSector = i; sTimers.forEach(clearTimeout); sTimers = [];
+    var l = root.lang === 'ar' ? 'ar' : 'en', other = l === 'ar' ? 'en' : 'ar';
+    var s = sectors[i];
+    var qo = l === 'ar' ? ['«','»'] : ['"','"'];
+    tryLive.textContent = s[l];
+    tryQ.className = 'try-q' + (l === 'ar' ? ' ar-q' : '');
+    tryAlt.className = 'try-q-alt' + (other === 'ar' ? ' ar-q' : '');
+    tryAlt.textContent = s[other]; tryAlt.dir = other === 'ar' ? 'rtl' : 'ltr';
+    tryNote.hidden = !s.note; tryNote.className = 'try-note' + (l === 'ar' ? ' ar-q' : ''); tryNoteT.textContent = s.note ? s.note[l] : '';
+    if (instant || reduce) { tryQ.textContent = qo[0] + s[l] + qo[1]; return; }
+    tryQ.innerHTML = ''; var t = document.createTextNode(''), c = document.createElement('span'); c.className = 'caret';
+    tryQ.appendChild(t); tryQ.appendChild(c);
+    var full = qo[0] + s[l] + qo[1], k = 0;
+    (function ty(){ if (k <= full.length){ t.nodeValue = full.slice(0, k++); sTimers.push(setTimeout(ty, 26)); } else { sTimers.push(setTimeout(function(){ c.remove(); }, 900)); } })();
+  }
+  document.querySelectorAll('.chip').forEach(function(ch){
+    ch.addEventListener('click', function(){
+      document.querySelectorAll('.chip').forEach(function(x){ x.setAttribute('aria-pressed', x === ch ? 'true' : 'false'); });
+      renderSector(+ch.dataset.s, false);
+    });
+  });
+
+  /* ---------- FAQ ---------- */
+  document.querySelectorAll('.qa button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var qa = b.closest('.qa'), open = qa.dataset.open === 'true';
+      qa.dataset.open = open ? 'false' : 'true'; b.setAttribute('aria-expanded', !open);
+    });
+  });
+
+  try { if (new URLSearchParams(location.search).get('lang') === 'ar') document.getElementById('canonical').href = 'https://catalystoman.github.io/?lang=ar'; } catch(e){}
+  setLang(initial, false);
+  onView(document.querySelector('.ask'), function(){ if (reduce) run('ar'); else run('en', function(){ run('ar'); }); }, .35);
 })();
 </script>
-
 </body>
 </html>
